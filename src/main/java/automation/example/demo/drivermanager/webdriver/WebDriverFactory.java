@@ -19,8 +19,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class WebDriverFactory {
 
-    public static WebDriver startWebDriver() {
-        final String browser = System.getProperty("webdriver.driver");
+    public static WebDriver startWebDriver(String browser) {
         WebDriver driver;
 
         switch (browser.toLowerCase()) {

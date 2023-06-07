@@ -1,5 +1,7 @@
 package automation.example.demo.pageobject;
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -63,45 +65,36 @@ public abstract class PageObject {
         return element.getText();
     }
 
-    public void waitUntilElementVisible(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, 30);
-        wait.until(ExpectedConditions.visibilityOf(element));
-    }
 
     public void waitUntilElementVisible(WebElement element, int timeOut) {
-        WebDriverWait wait = new WebDriverWait(driver, timeOut);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeOut));
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
     public void waitUntilElementVisible(By element, int timeOut) {
         WebElement webElement = driver.findElement(element);
-        WebDriverWait wait = new WebDriverWait(driver, timeOut);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeOut));
         wait.until(ExpectedConditions.visibilityOf(webElement));
     }
 
-    public void waitUntilElementInvisible(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, 30);
-        wait.until(ExpectedConditions.invisibilityOf(element));
-    }
-
     public void waitUntilElementInvisible(WebElement element, int timeOut) {
-        WebDriverWait wait = new WebDriverWait(driver, timeOut);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeOut));
         wait.until(ExpectedConditions.invisibilityOf(element));
     }
 
     public void waitUntilElementInvisible(By element, int timeOut) {
         WebElement webElement = driver.findElement(element);
-        WebDriverWait wait = new WebDriverWait(driver, timeOut);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeOut));
         wait.until(ExpectedConditions.invisibilityOf(webElement));
     }
 
-    public void waitUntilElementClickable(WebDriver driver, WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, 30);
+    public void waitUntilElementClickable(WebElement element, int timeOut) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeOut));
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
-    public void waitUntilElementClickable(WebDriver driver, By element) {
-        WebDriverWait wait = new WebDriverWait(driver, 30);
+    public void waitUntilElementClickable(By element, int timeOut) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeOut));
         wait.until(ExpectedConditions.elementToBeClickable((element)));
     }
 
