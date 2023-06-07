@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import automation.example.demo.basetest.BaseTest;
+import automation.example.demo.basetest.BaseWebTest;
 import automation.example.demo.features.search.ui.pages.GoogleHomePage;
 import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
@@ -17,7 +17,7 @@ import io.qameta.allure.Story;
         @Tag("Regression"),
         @Tag("GoogleHomeSearch"),
 })
-public class GoogleHomeSearchTest extends BaseTest {
+public class GoogleHomeSearchTest extends BaseWebTest {
     GoogleHomePage googleHomePage;
 
     @Severity(SeverityLevel.NORMAL)

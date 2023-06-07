@@ -12,7 +12,7 @@ public class AllureReportHelper {
 
     public static void attachScreenshot(WebDriver driver) {
         Allure.addAttachment(
-                "screenshot", new ByteArrayInputStream(((TakesScreenshot) driver)
-                                                             .getScreenshotAs(OutputType.BYTES)));
+                "screenshot", new ByteArrayInputStream(
+                        ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES)));
     }
 }

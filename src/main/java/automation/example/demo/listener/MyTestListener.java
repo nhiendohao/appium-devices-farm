@@ -34,7 +34,7 @@ public class MyTestListener implements TestExecutionListener {
 
     @Override
     public void executionFinished(TestIdentifier testIdentifier, TestExecutionResult testExecutionResult) {
-        System.out.println("My Test Listener!!!!");
+        System.out.println("Update test result. Code here...");
     }
 
     @Override

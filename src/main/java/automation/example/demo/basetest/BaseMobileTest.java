@@ -7,14 +7,12 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.openqa.selenium.WebDriver;
 
 import automation.example.demo.drivermanager.DriverManager;
-//import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.AppiumDriver;
 
-public class BaseTest {
-    protected WebDriver driver;
-//    protected AppiumDriver appiumDriver;
+public class BaseMobileTest {
+    protected AppiumDriver appiumDriver;
 
     @BeforeAll
     public static void setup() {
@@ -28,15 +26,12 @@ public class BaseTest {
 
     @BeforeEach
     public void beforeTest() {
-//        appiumDriver = DriverManager.getAppiumDriver();
-        driver = DriverManager.getWebDriver();
+        final String deviceUDID = System.getProperty("appium.udid");
+        appiumDriver = DriverManager.getMobileDriver(deviceUDID);
     }
 
     @AfterEach
     public void afterTest() {
-        driver.quit();
-//        appiumDriver.quit();
-
+        appiumDriver.quit();
     }
-
 }

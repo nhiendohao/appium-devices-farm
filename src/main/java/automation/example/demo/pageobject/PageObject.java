@@ -19,6 +19,13 @@ public abstract class PageObject {
         PageFactory.initElements(driver, this);
     }
 
+    public WebDriver getCurrentDriver() {
+        if (driver == null) {
+            throw new NullPointerException("Driver is null");
+        }
+        return driver;
+    }
+
     public void navigateTo(String url) {
         driver.navigate().to(url);
     }

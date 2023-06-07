@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
-import automation.example.demo.basetest.BaseTest;
+import automation.example.demo.basetest.BaseWebTest;
 import automation.example.demo.features.search.ui.pages.GooglePage;
 import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
@@ -15,7 +15,7 @@ import io.qameta.allure.Story;
         @Tag("Regression"),
         @Tag("GoogleSearch"),
 })
-public class GoogleSearchTest extends BaseTest {
+public class GoogleSearchTest extends BaseWebTest {
     GooglePage googlePage;
 
     @Severity(SeverityLevel.NORMAL)
