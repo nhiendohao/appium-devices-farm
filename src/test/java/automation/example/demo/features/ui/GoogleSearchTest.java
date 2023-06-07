@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
 import automation.example.demo.basetest.BaseTest;
-import automation.example.demo.features.login.ui.web.pages.google.GooglePage;
+import automation.example.demo.features.search.ui.pages.GooglePage;
 import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;

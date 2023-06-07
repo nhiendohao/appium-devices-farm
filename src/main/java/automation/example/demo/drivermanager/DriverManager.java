@@ -19,8 +19,10 @@ public class DriverManager {
 
     public static AppiumDriver getAppiumDriver() {
         final String deviceUDID = System.getProperty("appium.udid");
-        final DesiredCapabilityBuilder builder = new DesiredCapabilityBuilder();
-        appiumDriver = AppiumManager.startAppiumDriver(builder.buildDesiredCapabilities(deviceUDID));
+        if (appiumDriver == null) {
+            final DesiredCapabilityBuilder builder = new DesiredCapabilityBuilder();
+            appiumDriver = AppiumManager.startAppiumDriver(builder.buildDesiredCapabilities(deviceUDID));
+        }
         return appiumDriver;
     }
 
