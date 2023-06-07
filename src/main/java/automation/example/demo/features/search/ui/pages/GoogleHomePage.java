@@ -29,7 +29,7 @@ public class GoogleHomePage extends PageObject {
 
     @Step("Open Google page")
     public void openApplication() {
-        navigateTo("https://www.google.com.vn");
+        navigateTo(System.getProperty("baseurl"));
         AllureReportHelper.attachScreenshot(driver);
     }
 

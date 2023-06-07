@@ -28,6 +28,30 @@
         <webdriver.remoteurl>http://localhost:4444/wd/hub</webdriver.remoteurl>
     </properties>
 
+    <profiles>
+        <profile>
+            <id>beta</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <baseurl>https://google.com.vn</baseurl>
+                <api.baseurl>https://google.com.vn</api.baseurl>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>rc</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <baseurl>https://google.com.vn</baseurl>
+                <api.baseurl>https://google.com.vn</api.baseurl>
+            </properties>
+        </profile>
+    </profiles>
+
     <dependencies>
 
         <dependency>
@@ -152,6 +176,8 @@
                         <appium.udid>${appium.udid}</appium.udid>
                         <webdriver.driver>${webdriver.driver}</webdriver.driver>
                         <webdriver.remoteurl>${webdriver.remoteurl}</webdriver.remoteurl>
+                        <baseurl>${baseurl}</baseurl>
+                        <api.baseurl>${api.baseurl}</api.baseurl>
                     </systemPropertyVariables>
                 </configuration>
 
