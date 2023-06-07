@@ -17,25 +17,23 @@ public class GooglePage extends PageObject {
         return String.format("//textarea[@name='%s']", argument);
     }
 
-    WebDriver driver;
-
     public GooglePage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     @Step("Open Google page")
     public void openApplication() {
-        navigateTo(driver, "https://www.google.com.vn");
+        navigateTo("https://www.google.com.vn");
     }
 
     @Step("Search for keyword")
     public void searchFor(String keyword) {
-        enter(driver, SEARCH_BAR, keyword);
-        enterKey(driver, Keys.ENTER);
+        enter(SEARCH_BAR, keyword);
+        enterKey(Keys.ENTER);
     }
 
     @Step("Verify Google Logo")
     public void verifyGoogleLogo() {
-        assertTrue(isElementPresent(driver, GOOGLE_LOGO));
+        assertTrue(isElementPresent(GOOGLE_LOGO));
     }
 }

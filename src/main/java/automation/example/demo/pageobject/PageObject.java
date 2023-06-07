@@ -5,11 +5,19 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public abstract class PageObject {
-    public void navigateTo(WebDriver driver, String url) {
+    protected WebDriver driver;
+
+    public PageObject (WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+    }
+
+    public void navigateTo(String url) {
         driver.navigate().to(url);
     }
 
@@ -17,7 +25,7 @@ public abstract class PageObject {
         element.click();
     }
 
-    public void clickOn(WebDriver driver, By by) {
+    public void clickOn(By by) {
         WebElement element = driver.findElement(by);
         element.click();
     }
@@ -26,18 +34,18 @@ public abstract class PageObject {
         element.sendKeys(value);
     }
 
-    public void enter(WebDriver driver, By by, String value) {
+    public void enter(By by, String value) {
         WebElement element = driver.findElement(by);
         element.sendKeys(value);
     }
 
-    public void enterKey(WebDriver driver, Keys keyEvent) {
+    public void enterKey(Keys keyEvent) {
         Actions actions = new Actions(driver);
         actions.sendKeys(keyEvent)
                .perform();
     }
 
-    public boolean isElementPresent(WebDriver driver, By by) {
+    public boolean isElementPresent(By by) {
         WebElement element = driver.findElement(by);
         return element.isDisplayed();
     }
@@ -50,38 +58,38 @@ public abstract class PageObject {
         return element.getText();
     }
 
-    public String getText(WebDriver driver, By by) {
+    public String getText(By by) {
         WebElement element = driver.findElement(by);
         return element.getText();
     }
 
-    public void waitUntilElementVisible(WebDriver driver, WebElement element) {
+    public void waitUntilElementVisible(WebElement element) {
         WebDriverWait wait = new WebDriverWait(driver, 30);
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
-    public void waitUntilElementVisible(WebDriver driver, WebElement element, int timeOut) {
+    public void waitUntilElementVisible(WebElement element, int timeOut) {
         WebDriverWait wait = new WebDriverWait(driver, timeOut);
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
-    public void waitUntilElementVisible(WebDriver driver, By element, int timeOut) {
+    public void waitUntilElementVisible(By element, int timeOut) {
         WebElement webElement = driver.findElement(element);
         WebDriverWait wait = new WebDriverWait(driver, timeOut);
         wait.until(ExpectedConditions.visibilityOf(webElement));
     }
 
-    public void waitUntilElementInvisible(WebDriver driver, WebElement element) {
+    public void waitUntilElementInvisible(WebElement element) {
         WebDriverWait wait = new WebDriverWait(driver, 30);
         wait.until(ExpectedConditions.invisibilityOf(element));
     }
 
-    public void waitUntilElementInvisible(WebDriver driver, WebElement element, int timeOut) {
+    public void waitUntilElementInvisible(WebElement element, int timeOut) {
         WebDriverWait wait = new WebDriverWait(driver, timeOut);
         wait.until(ExpectedConditions.invisibilityOf(element));
     }
 
-    public void waitUntilElementInvisible(WebDriver driver, By element, int timeOut) {
+    public void waitUntilElementInvisible(By element, int timeOut) {
         WebElement webElement = driver.findElement(element);
         WebDriverWait wait = new WebDriverWait(driver, timeOut);
         wait.until(ExpectedConditions.invisibilityOf(webElement));

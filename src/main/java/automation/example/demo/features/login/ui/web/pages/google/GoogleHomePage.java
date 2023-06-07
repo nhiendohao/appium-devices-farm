@@ -22,16 +22,13 @@ public class GoogleHomePage extends PageObject {
         return String.format("//textarea[@name='%s']", argument);
     }
 
-    WebDriver driver;
-
     public GoogleHomePage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
 
     @Step("Open Google page")
     public void openApplication() {
-        navigateTo(driver, "https://www.google.com.vn");
+        navigateTo("https://www.google.com.vn");
     }
 
     @Step("Search for keyword")

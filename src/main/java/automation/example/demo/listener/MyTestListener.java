@@ -11,6 +11,8 @@ import org.junit.platform.launcher.TestPlan;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
+import automation.example.demo.basetest.BaseTest;
+import automation.example.demo.drivermanager.DriverManager;
 import io.qameta.allure.Allure;
 
 public class MyTestListener implements TestExecutionListener {
@@ -43,11 +45,12 @@ public class MyTestListener implements TestExecutionListener {
     public void executionFinished(TestIdentifier testIdentifier, TestExecutionResult testExecutionResult) {
         TestExecutionListener.super.executionFinished(testIdentifier, testExecutionResult);
 
-//        if (testExecutionResult.getStatus() == Status.FAILED) {
-//            Allure.addAttachment(
-//                    testIdentifier.getDisplayName(),
-//                    new ByteArrayInputStream(
-//                            ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES)));
+        System.out.println("Hello World!!!!");
+//        if (testExecutionResult.getStatus() == Status.SUCCESSFUL) {
+            Allure.addAttachment(
+                    testIdentifier.getDisplayName(),
+                    new ByteArrayInputStream(
+                            ((TakesScreenshot) DriverManager.getWebDriver()).getScreenshotAs(OutputType.BYTES)));
 //        }
     }
 
