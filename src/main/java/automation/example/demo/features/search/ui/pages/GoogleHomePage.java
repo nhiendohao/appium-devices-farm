@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import automation.example.demo.pageobject.PageObject;
+import helpers.AllureReportHelper;
 import io.qameta.allure.Step;
 
 public class GoogleHomePage extends PageObject {
@@ -29,6 +30,7 @@ public class GoogleHomePage extends PageObject {
     @Step("Open Google page")
     public void openApplication() {
         navigateTo("https://www.google.com.vn");
+        AllureReportHelper.attachScreenshot(driver);
     }
 
     @Step("Search for keyword")

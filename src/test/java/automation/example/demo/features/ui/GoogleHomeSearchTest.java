@@ -3,6 +3,8 @@ package automation.example.demo.features.ui;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import automation.example.demo.basetest.BaseTest;
 import automation.example.demo.features.search.ui.pages.GoogleHomePage;
@@ -19,13 +21,14 @@ public class GoogleHomeSearchTest extends BaseTest {
     GoogleHomePage googleHomePage;
 
     @Severity(SeverityLevel.NORMAL)
-    @Test
     @Description("Verify corresponding result displays when searching for animal")
     @Story("Google Page")
-    public void verifyCorrespondingResultDisplaysWhenSearchingForAnimal() {
+    @ParameterizedTest
+    @ValueSource(strings = { "Elephant", "Dog"})
+    public void verifyCorrespondingResultDisplaysWhenSearchingForAnimal(String animal) {
         googleHomePage = new GoogleHomePage(driver);
         googleHomePage.openApplication();
-        googleHomePage.searchFor("I like a elephant");
+        googleHomePage.searchFor("I like a " + animal);
     }
 
     @Severity(SeverityLevel.NORMAL)

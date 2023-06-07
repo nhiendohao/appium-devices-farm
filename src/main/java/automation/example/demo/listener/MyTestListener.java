@@ -1,19 +1,10 @@
 package automation.example.demo.listener;
 
-import java.io.ByteArrayInputStream;
-
 import org.junit.platform.engine.TestExecutionResult;
-import org.junit.platform.engine.TestExecutionResult.Status;
 import org.junit.platform.engine.reporting.ReportEntry;
 import org.junit.platform.launcher.TestExecutionListener;
 import org.junit.platform.launcher.TestIdentifier;
 import org.junit.platform.launcher.TestPlan;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-
-import automation.example.demo.basetest.BaseTest;
-import automation.example.demo.drivermanager.DriverManager;
-import io.qameta.allure.Allure;
 
 public class MyTestListener implements TestExecutionListener {
     @Override
@@ -43,15 +34,7 @@ public class MyTestListener implements TestExecutionListener {
 
     @Override
     public void executionFinished(TestIdentifier testIdentifier, TestExecutionResult testExecutionResult) {
-        TestExecutionListener.super.executionFinished(testIdentifier, testExecutionResult);
-
-        System.out.println("Hello World!!!!");
-//        if (testExecutionResult.getStatus() == Status.SUCCESSFUL) {
-            Allure.addAttachment(
-                    testIdentifier.getDisplayName(),
-                    new ByteArrayInputStream(
-                            ((TakesScreenshot) DriverManager.getWebDriver()).getScreenshotAs(OutputType.BYTES)));
-//        }
+        System.out.println("My Test Listener!!!!");
     }
 
     @Override
