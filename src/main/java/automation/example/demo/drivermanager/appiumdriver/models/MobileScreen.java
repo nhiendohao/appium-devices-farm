@@ -1,4 +1,4 @@
-package automation.example.demo.drivermanager.appiumdriver.mobile;
+package automation.example.demo.drivermanager.appiumdriver.models;
 
 import java.awt.Point;
 

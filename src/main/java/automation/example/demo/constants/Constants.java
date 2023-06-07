@@ -5,4 +5,5 @@ public class Constants {
 
     public static final String JSON_DATA_DIRECTORY_PATH = "src/main/resources/testdata";
 
+    public static final String CHANNEL_LIST_FILE_PATH = "./testdata/json/channel-list.json";
 }

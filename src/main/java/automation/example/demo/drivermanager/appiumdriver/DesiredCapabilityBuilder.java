@@ -6,8 +6,8 @@ import java.util.Map;
 
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import automation.example.demo.drivermanager.appiumdriver.mobile.DeviceCapabilities;
-import automation.example.demo.drivermanager.appiumdriver.mobile.DeviceCapabilitiesList;
+import automation.example.demo.drivermanager.appiumdriver.models.DeviceCapabilities;
+import automation.example.demo.drivermanager.appiumdriver.models.DeviceCapabilitiesList;
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.IOSMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
