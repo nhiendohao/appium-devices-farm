@@ -15,4 +15,5 @@ public class AllureReportHelper {
                 "screenshot", new ByteArrayInputStream(
                         ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES)));
     }
+
 }

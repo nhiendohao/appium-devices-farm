@@ -14,16 +14,11 @@ import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.remote.MobilePlatform;
 
 public class DesiredCapabilityBuilder {
-    private static Map<String, DeviceCapabilities> deviceCapabilitiesList;
-
-    private Map<String, DeviceCapabilities> getDeviceCapabilitiesList() {
-        deviceCapabilitiesList = DeviceCapabilitiesList.getInstance()
-                                                       .getDeviceCapabilitiesList();
-        return deviceCapabilitiesList;
-    }
 
     public DesiredCapabilities buildDesiredCapabilities(String udid) {
-        final DeviceCapabilities deviceCapabilities = getDeviceCapabilitiesList().get(udid);
+        final DeviceCapabilities deviceCapabilities = DeviceCapabilitiesList.getInstance()
+                                                                            .getDeviceCapabilitiesList()
+                                                                            .get(udid);
 
         if (MobilePlatform.ANDROID.equals(deviceCapabilities.getPlatformName())) {
             return androidDesiredCapabilities(deviceCapabilities);

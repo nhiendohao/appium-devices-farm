@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import automation.example.demo.constants.Constants;
 import automation.example.demo.models.Channel;
 import io.qameta.allure.Step;
 import io.restassured.RestAssured;
@@ -18,7 +19,7 @@ public class ChannelController {
     @Step("Create Channel by API")
     public void createChannelByAPI(Channel channel) {
         RestAssured.given()
-                   .baseUri(System.getProperty("cms.api.baseurl"))
+                   .baseUri(Constants.API_BASE_URL)
                    .contentType("application/json")
                    .when()
                    .log().all()
@@ -29,7 +30,7 @@ public class ChannelController {
     @Step("Get Channel by API")
     public void getChannelByAPI(String channelId, String channelName) {
         RestAssured.given()
-                   .baseUri(System.getProperty("cms.api.baseurl"))
+                   .baseUri(Constants.API_BASE_URL)
                    .pathParams("channelId", channelId, "channelName", channelName, "pageNum", 0, "pageSize", 10)
                    .when()
                    .log().all()
@@ -40,7 +41,7 @@ public class ChannelController {
     @Step("Delete Channel by API")
     public void deleteChannelByAPI(String channelId) {
         RestAssured.given()
-                   .baseUri(System.getProperty("cms.api.baseurl"))
+                   .baseUri(Constants.API_BASE_URL)
                    .pathParam("channelId", channelId)
                    .when()
                    .log().all()
@@ -56,12 +57,11 @@ public class ChannelController {
         for (int i = 0; i < channelList.size(); i++) {
             final JsonObject jsonChannel = channelList.get(i).getAsJsonObject();
 
-            if (jsonChannel.get("channelId").getAsString().equalsIgnoreCase(channelId)) {
+            if (jsonChannel.get("channelId")
+                           .getAsString()
+                           .equalsIgnoreCase(channelId)) {
                 // Convert JsonObject to Object
                 return new Gson().fromJson(jsonChannel.toString(), Channel.class);
-//                InputStream inputStream = new ByteArrayInputStream(jsonChannel.toString().getBytes(StandardCharsets.UTF_8));
-//                Reader reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
-//                return new Gson().fromJson(reader, Channel.class);
             }
         }
         return null;
