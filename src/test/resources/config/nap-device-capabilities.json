@@ -25,7 +25,7 @@
       "app": "path/to/your/apk",
       "noReset": true,
       "nativeWebScreenshot": true,
-      "systemPort": "8103",
+      "systemPort": "8101",
       "fullReset": false
     },
     "353494090231935": {
@@ -48,8 +48,22 @@
       "udid": "QV780HN49H",
       "deviceName": "Sony Experia 5 III",
       "platformVersion": "12",
-      "appPackage": "jp.naver.line.android",
-      "appActivity": "jp.naver.line.android.activity.SplashActivity",
+      "appPackage": "com.google.android.youtube",
+      "appActivity": "com.google.android.apps.youtube.app.watchwhile.WatchWhileActivity",
+      "app": "path/to/your/apk",
+      "noReset": true,
+      "nativeWebScreenshot": true,
+      "systemPort": "8103",
+      "fullReset": false
+    },
+    "R5CT20VRX5Y": {
+      "automationName": "UiAutomator2",
+      "platformName": "Android",
+      "udid": "R5CT20VRX5Y",
+      "deviceName": "Galaxy S21 FE 5G",
+      "platformVersion": "12",
+      "appPackage": "com.google.android.youtube",
+      "appActivity": "com.google.android.apps.youtube.app.watchwhile.WatchWhileActivity",
       "app": "path/to/your/apk",
       "noReset": true,
       "nativeWebScreenshot": true,

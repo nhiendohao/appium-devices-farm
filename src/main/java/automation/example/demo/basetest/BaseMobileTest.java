@@ -6,9 +6,8 @@ import static automation.example.demo.drivermanager.appiumdriver.AppiumManager.s
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 
-import automation.example.demo.drivermanager.DriverManager;
+import helpers.AllureReportHelper;
 import io.appium.java_client.AppiumDriver;
 
 public class BaseMobileTest {
@@ -24,14 +23,9 @@ public class BaseMobileTest {
         stopAppiumServer();
     }
 
-    @BeforeEach
-    public void beforeTest() {
-        final String deviceUDID = System.getProperty("appium.udid");
-        appiumDriver = DriverManager.getMobileDriver(deviceUDID);
-    }
-
     @AfterEach
     public void afterTest() {
+        AllureReportHelper.attachScreenshot(appiumDriver);
         appiumDriver.quit();
     }
 }

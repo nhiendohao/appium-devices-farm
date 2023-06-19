@@ -1,4 +1,4 @@
-package automation.example.demo.features.ui;
+package automation.example.demo.features.google;
 
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
