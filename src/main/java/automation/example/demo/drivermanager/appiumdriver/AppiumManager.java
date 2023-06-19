@@ -2,6 +2,8 @@ package automation.example.demo.drivermanager.appiumdriver;
 
 import static io.appium.java_client.service.local.flags.GeneralServerFlag.USE_PLUGINS;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.slf4j.Logger;

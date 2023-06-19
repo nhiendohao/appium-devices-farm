@@ -1,7 +1,7 @@
 package automation.example.demo.drivermanager.webdriver;
 
 import java.net.URL;
-import java.util.concurrent.TimeUnit;
+import java.time.Duration;
 
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
@@ -57,8 +57,8 @@ public class WebDriverFactory {
 //                chromeOptions.setExperimentalOption("mobileEmulation", mobileEmulation);
                 driver = new ChromeDriver(chromeOptions);
         }
-
-        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
         driver.manage().window().setSize(new Dimension(1280, 1024));
         return driver;
     }

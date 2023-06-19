@@ -2,7 +2,6 @@ package automation.example.demo.drivermanager.appiumdriver;
 
 import java.io.IOException;
 import java.net.ServerSocket;
-import java.util.Map;
 
 import org.openqa.selenium.remote.DesiredCapabilities;
 
