@@ -20,12 +20,8 @@ public class DriverManager {
     }
 
     public static AppiumDriver getMobileDriver(String deviceUdid) {
-        AppiumDriver driver;
         final DesiredCapabilityBuilder builder = new DesiredCapabilityBuilder();
-        driver = AppiumManager.startAppiumDriver(builder.buildDesiredCapabilities(deviceUdid));
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
-        return driver;
+        return AppiumManager.startAppiumDriver(builder.buildDesiredCapabilities(deviceUdid));
     }
 
     public static Platform getMobilePlatform(WebDriver driver) {
