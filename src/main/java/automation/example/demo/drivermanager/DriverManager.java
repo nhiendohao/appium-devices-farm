@@ -34,7 +34,8 @@ public class DriverManager {
             } else {
                 return Platform.MAC;
             }
-        } catch (Exception ex) {
+        } catch (NoSuchDriverException ex) {
+            ex.printStackTrace();
             throw new NoSuchDriverException("Unknown driver");
         }
     }
