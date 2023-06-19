@@ -12,6 +12,7 @@ public class MobileObject extends PageObject{
 
     public MobileObject(WebDriver driver) {
         super(driver);
+        this.driver = driver;
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
 

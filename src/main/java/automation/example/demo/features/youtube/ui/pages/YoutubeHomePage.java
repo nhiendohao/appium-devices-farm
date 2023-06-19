@@ -1,10 +1,13 @@
 package automation.example.demo.features.youtube.ui.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import automation.example.demo.drivermanager.DriverManager;
 import automation.example.demo.pageobject.MobileObject;
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import io.qameta.allure.Step;
@@ -19,7 +22,11 @@ public class YoutubeHomePage extends MobileObject {
     WebElement SEARCH_BAR;
 
     public By suggestionList(int suggestionIndex) {
-        return By.xpath(String.format("(//android.widget.TextView)[%s]", suggestionIndex));
+        Platform platform = DriverManager.getMobilePlatform(driver);
+        if (Platform.ANDROID.equals(platform)) {
+            return AppiumBy.xpath(String.format("(//android.widget.TextView)[%s]", suggestionIndex));
+        }
+        return AppiumBy.xpath(String.format("ios[%s]", suggestionIndex));
     }
 
     public YoutubeHomePage(WebDriver driver) {
