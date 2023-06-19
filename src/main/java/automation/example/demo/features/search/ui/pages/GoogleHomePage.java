@@ -6,7 +6,6 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 import automation.example.demo.pageobject.PageObject;
 import helpers.AllureReportHelper;
@@ -14,12 +13,12 @@ import io.qameta.allure.Step;
 
 public class GoogleHomePage extends PageObject {
     @FindBy(xpath = "//textarea[@name='q']")
-    WebElement SEARCH_BAR;
+    WebElement searchBar;
 
     @FindBy(xpath = "//img[@class='lnXdpd']")
-    WebElement GOOGLE_LOGO;
+    WebElement googleLogo;
 
-    public String SEARCH_BAR_STRING(String argument) {
+    public String searchBarString(String argument) {
         return String.format("//textarea[@name='%s']", argument);
     }
 
@@ -35,12 +34,12 @@ public class GoogleHomePage extends PageObject {
 
     @Step("Search for keyword")
     public void searchFor(String keyword) {
-        enter(SEARCH_BAR, keyword);
-        SEARCH_BAR.sendKeys(Keys.ENTER);
+        enter(searchBar, keyword);
+        searchBar.sendKeys(Keys.ENTER);
     }
 
     @Step("Verify Google Logo")
     public void verifyGoogleLogo() {
-        assertTrue(isElementPresent(GOOGLE_LOGO));
+        assertTrue(isElementPresent(googleLogo));
     }
 }

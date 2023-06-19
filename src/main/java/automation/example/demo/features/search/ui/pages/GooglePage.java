@@ -11,10 +11,10 @@ import helpers.AllureReportHelper;
 import io.qameta.allure.Step;
 
 public class GooglePage extends PageObject {
-    By SEARCH_BAR = By.xpath("//textarea[@name='q']");
-    By GOOGLE_LOGO = By.xpath("//img[@class='lnXdpd']");
+    By searchBar = By.xpath("//textarea[@name='q']");
+    By googleLogo = By.xpath("//img[@class='lnXdpd']");
 
-    public String SEARCH_BAR_STRING(String argument) {
+    public String searchBarString(String argument) {
         return String.format("//textarea[@name='%s']", argument);
     }
 
@@ -30,12 +30,12 @@ public class GooglePage extends PageObject {
 
     @Step("Search for keyword")
     public void searchFor(String keyword) {
-        enter(SEARCH_BAR, keyword);
+        enter(searchBar, keyword);
         enterKey(Keys.ENTER);
     }
 
     @Step("Verify Google Logo")
     public void verifyGoogleLogo() {
-        assertTrue(isElementPresent(GOOGLE_LOGO));
+        assertTrue(isElementPresent(googleLogo));
     }
 }

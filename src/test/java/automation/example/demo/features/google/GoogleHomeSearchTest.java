@@ -15,7 +15,7 @@ import io.qameta.allure.Story;
 
 @Tags({
         @Tag("Regression"),
-        @Tag("GoogleHomeSearch"),
+        @Tag("GoogleSearch"),
 })
 public class GoogleHomeSearchTest extends BaseWebTest {
     GoogleHomePage googleHomePage;

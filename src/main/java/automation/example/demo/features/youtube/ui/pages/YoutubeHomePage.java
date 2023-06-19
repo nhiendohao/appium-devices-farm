@@ -15,18 +15,18 @@ import io.qameta.allure.Step;
 public class YoutubeHomePage extends MobileObject {
     @AndroidFindBy(accessibility = "Search")
     @iOSXCUITFindBy(accessibility = "Search")
-    WebElement SEARCH_ICON;
+    WebElement searchIcon;
 
     @AndroidFindBy(id = "com.google.android.youtube:id/search_edit_text")
     @iOSXCUITFindBy(id = "Search")
-    WebElement SEARCH_BAR;
+    WebElement searchBar;
 
-    public By suggestionList(int suggestionIndex) {
+    public By suggestionList(int index) {
         Platform platform = DriverManager.getMobilePlatform(driver);
         if (Platform.ANDROID.equals(platform)) {
-            return AppiumBy.xpath(String.format("(//android.widget.TextView)[%s]", suggestionIndex));
+            return AppiumBy.xpath(String.format("(//android.widget.TextView)[%s]", index));
         }
-        return AppiumBy.xpath(String.format("ios[%s]", suggestionIndex));
+        return AppiumBy.xpath(String.format("ios[%s]", index));
     }
 
     public YoutubeHomePage(WebDriver driver) {
@@ -35,10 +35,14 @@ public class YoutubeHomePage extends MobileObject {
 
     @Step("Search for keyword")
     public void searchFor(String keyword) {
-        clickOn(SEARCH_ICON);
-        enter(SEARCH_BAR, keyword);
-        waitUntilElementVisible(suggestionList(1), 30);
-        clickOn(suggestionList(1));
+        clickOn(searchIcon);
+        enter(searchBar, keyword);
+    }
+
+    @Step("Choose an item from suggestion list")
+    public void chooseAnItemFromSuggestionList(int index) {
+        waitUntilElementVisible(suggestionList(index), 30);
+        clickOn(suggestionList(index));
     }
 
 }

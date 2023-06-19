@@ -34,6 +34,7 @@ public class YoutubeHomeSearchTest extends BaseMobileTest {
     public void verifyCorrespondingResultDisplaysWhenSearchingForChicken() {
         youtubeHomePage = new YoutubeHomePage(appiumDriver);
         youtubeHomePage.searchFor("chicken");
+        youtubeHomePage.chooseAnItemFromSuggestionList(1);
     }
 
     @Severity(SeverityLevel.NORMAL)
@@ -43,5 +44,6 @@ public class YoutubeHomeSearchTest extends BaseMobileTest {
     public void verifyCorrespondingResultDisplaysWhenSearchingForDog() {
         youtubeHomePage = new YoutubeHomePage(appiumDriver);
         youtubeHomePage.searchFor("Dog");
+        youtubeHomePage.chooseAnItemFromSuggestionList(1);
     }
 }

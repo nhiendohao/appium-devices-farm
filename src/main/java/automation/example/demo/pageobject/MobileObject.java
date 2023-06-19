@@ -8,11 +8,9 @@ import org.openqa.selenium.support.PageFactory;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 
 public class MobileObject extends PageObject{
-    protected WebDriver driver;
 
     public MobileObject(WebDriver driver) {
         super(driver);
-        this.driver = driver;
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
 
