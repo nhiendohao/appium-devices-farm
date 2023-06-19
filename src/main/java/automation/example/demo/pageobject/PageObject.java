@@ -63,6 +63,14 @@ public abstract class PageObject {
         return element.isDisplayed();
     }
 
+    public void waitForAWhile (int timeOut) {
+        try {
+            Thread.sleep(1000L * timeOut);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public String getText(WebElement element) {
         return element.getText();
     }
