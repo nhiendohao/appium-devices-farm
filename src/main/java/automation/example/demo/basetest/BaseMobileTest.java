@@ -26,6 +26,8 @@ public class BaseMobileTest {
     @AfterEach
     public void afterTest() {
         AllureReportHelper.attachScreenshot(appiumDriver);
-        appiumDriver.quit();
+        if (appiumDriver != null) {
+            appiumDriver.quit();
+        }
     }
 }
