@@ -9,23 +9,35 @@
 
 ## Maven command
 - Run all tests
-```mvn clean test```
+```
+mvn clean test
+```
 
 **Run test by tags**
 
 - Run tests which tagged with `load` and exclude tagged with `api`
-```mvn test -Dgroups="load" -DexcludedGroups="api"```
+```
+mvn test -Dgroups="load" -DexcludedGroups="api"
+```
 
 - Run tests which tagged with `api` or  `performance`
-```mvn test -Dgroups="api | performance"```
+```
+mvn test -Dgroups="api | performance"
+```
 
 - Run tests which tagged both `api` and  `performance`
-```mvn test -Dgroups="api & performance"```
+```
+mvn test -Dgroups="api & performance"
+```
 
 ### Allure Report
 - Install Allure Report
-```brew install allure```
+```
+brew install allure
+```
 
-**Generate Allure Report**
-```allure serve allure-results```
+- Generate Allure Report
+```
+allure serve allure-results
+```
 
