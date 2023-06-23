@@ -17,17 +17,17 @@ mvn clean test
 
 - Run tests which tagged with `load` and exclude tagged with `api`
 ```
-mvn test -Dgroups="load" -DexcludedGroups="api"
+mvn test -Dgroups="YoutubeSearch" -DexcludedGroups="api"
 ```
 
 - Run tests which tagged with `api` or  `performance`
 ```
-mvn test -Dgroups="api | performance"
+mvn test -Dgroups="api | YoutubeSearch"
 ```
 
 - Run tests which tagged both `api` and  `performance`
 ```
-mvn test -Dgroups="api & performance"
+mvn test -Dgroups="api & YoutubeSearch"
 ```
 
 ### Allure Report
@@ -36,8 +36,13 @@ mvn test -Dgroups="api & performance"
 brew install allure
 ```
 
-- Generate Allure Report
+- Open Allure Report
 ```
 allure serve allure-results
+```
+
+- Generate clean report folder
+```
+allure generate --clean --output path_to_folder
 ```
 
