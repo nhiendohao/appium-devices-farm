@@ -14,6 +14,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import net.bytebuddy.asm.Advice.OffsetMapping.Target.ForField.ReadWrite;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 
@@ -60,8 +62,8 @@ public class DataLoaderUtils {
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            throw new Error("File " + fileName + " not found.");
         }
-
         return objects;
     }
 
@@ -75,18 +77,17 @@ public class DataLoaderUtils {
     }
 
     public static <T> T loadTestData(String fileName, Class<T> objectClass) {
-        Reader reader = null;
-
+        T object;
         try {
             final File dataFile = FileUtils.findFileByName(Constants.JSON_DATA_DIRECTORY_PATH, fileName);
             final InputStream inputStream = new FileInputStream(dataFile);;
-            reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
+            Reader reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
+            object = new Gson().fromJson(reader, objectClass);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            throw new Error("File " + fileName + " not found.");
         }
-
-        assert reader != null;
-        return new Gson().fromJson(reader, objectClass);
+        return object;
     }
 
     public static Collection<Object[]> loadFileData(String... fileNames) {
