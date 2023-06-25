@@ -9,6 +9,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 import automation.example.demo.basetest.BaseWebTest;
 import automation.example.demo.features.search.ui.pages.GoogleHomePage;
 import io.qameta.allure.Description;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Link;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
@@ -17,6 +19,7 @@ import io.qameta.allure.Story;
         @Tag("Regression"),
         @Tag("GoogleSearch"),
 })
+@Feature("GoogleSearch")
 public class GoogleHomeSearchTest extends BaseWebTest {
     GoogleHomePage googleHomePage;
 
@@ -25,6 +28,7 @@ public class GoogleHomeSearchTest extends BaseWebTest {
     @Story("Google Page")
     @ParameterizedTest
     @ValueSource(strings = { "Elephant", "Dog"})
+    @Link(name = "TC-001", type = "mylink")
     public void verifyCorrespondingResultDisplaysWhenSearchingForAnimal(String animal) {
         googleHomePage = new GoogleHomePage(driver);
         googleHomePage.openApplication();
@@ -35,6 +39,7 @@ public class GoogleHomeSearchTest extends BaseWebTest {
     @Test
     @Description("Verify corresponding result displays when searching for fruit")
     @Story("Google Page")
+    @Link(name = "TC-002", type = "mylink")
     public void verifyCorrespondingResultDisplaysWhenSearchingForFruit() {
         googleHomePage = new GoogleHomePage(driver);
         googleHomePage.openApplication();
@@ -45,6 +50,7 @@ public class GoogleHomeSearchTest extends BaseWebTest {
     @Test
     @Description("Verify Google Logo")
     @Story("Google Page")
+    @Link(name = "TC-003", type = "mylink")
     public void verifyGoogleLogo() {
         googleHomePage = new GoogleHomePage(driver);
         googleHomePage.openApplication();

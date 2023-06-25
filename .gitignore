@@ -1,4 +1,4 @@
 /.idea
-allure-results
-allure-report
-target
+target/
+allure-results/
+allure-report/

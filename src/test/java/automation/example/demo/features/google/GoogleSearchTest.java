@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import automation.example.demo.basetest.BaseWebTest;
 import automation.example.demo.features.search.ui.pages.GooglePage;
 import io.qameta.allure.Description;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Link;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
@@ -15,6 +17,7 @@ import io.qameta.allure.Story;
         @Tag("Regression"),
         @Tag("GoogleSearch"),
 })
+@Feature("GoogleSearch")
 public class GoogleSearchTest extends BaseWebTest {
     GooglePage googlePage;
 
@@ -22,6 +25,7 @@ public class GoogleSearchTest extends BaseWebTest {
     @Test
     @Description("Verify corresponding result displays when searching for animal")
     @Story("Google Page")
+    @Link(name = "TC-004", type = "mylink")
     public void verifyCorrespondingResultDisplaysWhenSearchingForAnimal() {
         googlePage = new GooglePage(driver);
         googlePage.openApplication();
@@ -32,6 +36,7 @@ public class GoogleSearchTest extends BaseWebTest {
     @Test
     @Description("Verify corresponding result displays when searching for fruit")
     @Story("Google Page")
+    @Link(name = "TC-004", type = "mylink")
     public void verifyCorrespondingResultDisplaysWhenSearchingForFruit() {
         googlePage = new GooglePage(driver);
         googlePage.openApplication();
@@ -42,6 +47,7 @@ public class GoogleSearchTest extends BaseWebTest {
     @Test
     @Description("Verify Google Logo")
     @Story("Google Page")
+    @Link(name = "TC-006", type = "mylink")
     public void verifyGoogleLogo() {
         googlePage = new GooglePage(driver);
         googlePage.openApplication();

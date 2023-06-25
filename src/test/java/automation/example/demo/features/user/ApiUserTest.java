@@ -17,6 +17,9 @@ import automation.example.demo.models.User;
 import automation.example.demo.utils.DataLoaderUtils;
 import automation.example.demo.utils.RandomUtils;
 import io.qameta.allure.Description;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Issue;
+import io.qameta.allure.Link;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
@@ -25,6 +28,7 @@ import io.qameta.allure.Story;
         @Tag("Regression"),
         @Tag("ApiUser"),
 })
+@Feature("ApiUser")
 public class ApiUserTest {
     UserController userController;
     User user;
@@ -38,7 +42,9 @@ public class ApiUserTest {
     @Severity(SeverityLevel.NORMAL)
     @Test
     @Description("Verify user is created successfully")
-    @Story("User")
+    @Story("UserStory")
+    @Issue("123")
+    @Link(name = "TC-001", type = "mylink")
     public void verifyUserIsCreatedSuccessfully() {
         String randomNumber = RandomUtils.generateRandomNumber(10);
 
