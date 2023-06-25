@@ -14,18 +14,18 @@
 ```
 
 **Run test by tags**
-- Run tests which tagged with `load` and exclude tagged with `api`
+- Run tests which tagged with `YoutubeSearch` and exclude tagged with `api`
 
 ```
-    mvn test -Dgroups="YoutubeSearch" -DexcludedGroups="api"
+    mvn clean test -Dgroups="YoutubeSearch" -DexcludedGroups="api"
 ```
 
-- Run tests which tagged with `api` or  `performance`
+- Run tests which tagged with `api` or  `YoutubeSearch`
 ```
     mvn test -Dgroups="api | YoutubeSearch"
 ```
 
-- Run tests which tagged both `api` and  `performance`
+- Run tests which tagged both `api` and  `YoutubeSearch`
 ```
     mvn test -Dgroups="api & YoutubeSearch"
 ```
@@ -40,12 +40,12 @@
 ```
 allure serve [path/to/allure-results]
 Example:
-    allure serve allure-results
+    allure serve target/allure-results
 ```
 
 - Generate clean report folder
 ```
 allure generate [path/to/allure-results] --clean --output [path/to/allure-report]
 Example:
-    allure generate allure-results --clean --output allure-report
+    allure generate target/allure-results --clean --output allure-report
 ```

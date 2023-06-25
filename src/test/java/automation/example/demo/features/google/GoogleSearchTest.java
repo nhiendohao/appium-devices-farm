@@ -13,6 +13,7 @@ import io.qameta.allure.Link;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
+import io.qameta.allure.TmsLink;
 
 @Tags({
         @Tag("Regression"),
@@ -24,10 +25,11 @@ public class GoogleSearchTest extends BaseWebTest {
 
     @Severity(SeverityLevel.NORMAL)
     @Test
-    @Description("Verify corresponding result displays when searching for animal")
-    @Story("Google Page")
-    @Link(name = "TC-004", type = "mylink")
+    @TmsLink("TC10014")
+    @Link(name = "GoogleLink", url = "https://www.googgle.com")
+    @Story("Search for animal")
     @DisplayName("TC10014: google search")
+    @Description("Verify corresponding result displays when searching for animal")
     public void verifyCorrespondingResultDisplaysWhenSearchingForAnimal() {
         googlePage = new GooglePage(driver);
         googlePage.openApplication();
@@ -36,10 +38,12 @@ public class GoogleSearchTest extends BaseWebTest {
 
     @Severity(SeverityLevel.NORMAL)
     @Test
-    @Description("Verify corresponding result displays when searching for fruit")
-    @Story("Google Page")
-    @Link(name = "TC-004", type = "mylink")
+    @Story("Search for animal")
+    @TmsLink("TC10015")
+    @Link(name = "GoogleLink", url = "https://www.googgle.com")
+    @Story("Search for fruit")
     @DisplayName("TC10015: google search")
+    @Description("Verify corresponding result displays when searching for fruit")
     public void verifyCorrespondingResultDisplaysWhenSearchingForFruit() {
         googlePage = new GooglePage(driver);
         googlePage.openApplication();
@@ -48,10 +52,11 @@ public class GoogleSearchTest extends BaseWebTest {
 
     @Severity(SeverityLevel.NORMAL)
     @Test
-    @Description("Verify Google Logo")
-    @Story("Google Page")
-    @Link(name = "TC-006", type = "mylink")
+    @TmsLink("TC10013")
+    @Link(name = "GoogleLink", url = "https://www.googgle.com")
+    @Story("Search for animal")
     @DisplayName("TC10016: google search")
+    @Description("Verify Google Logo")
     public void verifyGoogleLogo() {
         googlePage = new GooglePage(driver);
         googlePage.openApplication();

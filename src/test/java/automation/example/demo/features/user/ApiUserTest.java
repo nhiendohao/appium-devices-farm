@@ -24,12 +24,13 @@ import io.qameta.allure.Link;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
+import io.qameta.allure.TmsLink;
 
 @Tags({
         @Tag("Regression"),
         @Tag("ApiUser"),
 })
-@Feature("ApiUser")
+@Feature("User")
 public class ApiUserTest {
     UserController userController;
     User user;
@@ -42,11 +43,12 @@ public class ApiUserTest {
 
     @Severity(SeverityLevel.NORMAL)
     @Test
-    @Description("Verify user is created successfully")
-    @Story("UserStory")
+    @Story("Create user")
+    @Issue("TC10022")
+    @TmsLink("TC10022")
+    @Link(name = "GoogleLink", url = "https://www.googgle.com")
     @DisplayName("TC10022: create user")
-    @Issue("123")
-    @Link(name = "TC-001", type = "mylink")
+    @Description("Verify user is created successfully")
     public void verifyUserIsCreatedSuccessfully() {
         String randomNumber = RandomUtils.generateRandomNumber(10);
 

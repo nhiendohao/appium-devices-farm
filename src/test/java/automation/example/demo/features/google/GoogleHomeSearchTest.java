@@ -15,6 +15,7 @@ import io.qameta.allure.Link;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
+import io.qameta.allure.TmsLink;
 
 @Tags({
         @Tag("Regression"),
@@ -25,12 +26,13 @@ public class GoogleHomeSearchTest extends BaseWebTest {
     GoogleHomePage googleHomePage;
 
     @Severity(SeverityLevel.NORMAL)
-    @Description("Verify corresponding result displays when searching for animal")
-    @Story("Google Page")
     @ParameterizedTest
     @ValueSource(strings = { "Elephant", "Dog"})
-    @Link(name = "TC-001", type = "mylink")
+    @Link(name = "Google Link", url = "https://www.googgle.com")
+    @TmsLink("TC10011")
+    @Story("Search for animal")
     @DisplayName("TC10011: google search")
+    @Description("Verify corresponding result displays when searching for animal")
     public void verifyCorrespondingResultDisplaysWhenSearchingForAnimal(String animal) {
         googleHomePage = new GoogleHomePage(driver);
         googleHomePage.openApplication();
@@ -39,10 +41,11 @@ public class GoogleHomeSearchTest extends BaseWebTest {
 
     @Severity(SeverityLevel.NORMAL)
     @Test
-    @Description("Verify corresponding result displays when searching for fruit")
-    @Story("Google Page")
-    @Link(name = "TC-002", type = "mylink")
+    @TmsLink("TC10012")
+    @Link(name = "Google Link", url = "https://www.googgle.com")
+    @Story("Search for fruit")
     @DisplayName("TC10012: google search")
+    @Description("Verify corresponding result displays when searching for fruit")
     public void verifyCorrespondingResultDisplaysWhenSearchingForFruit() {
         googleHomePage = new GoogleHomePage(driver);
         googleHomePage.openApplication();
@@ -51,10 +54,10 @@ public class GoogleHomeSearchTest extends BaseWebTest {
 
     @Severity(SeverityLevel.NORMAL)
     @Test
-    @Description("Verify Google Logo")
-    @Story("Google Page")
-    @Link(name = "TC-003", type = "mylink")
+    @TmsLink("TC10013")
+    @Link(name = "Google Link", url = "https://www.googgle.com")
     @DisplayName("TC10013: google search")
+    @Description("Verify Google Logo")
     public void verifyGoogleLogo() {
         googleHomePage = new GoogleHomePage(driver);
         googleHomePage.openApplication();

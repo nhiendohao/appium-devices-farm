@@ -35,7 +35,7 @@ public class UserController {
     }
 
     public User getUserById(int userId) {
-        logger.info("Retrieve user by userId " + userId);
+        logger.info("Retrieve user by userId {}", + userId);
         Response response = RestAssured.given()
                                        .baseUri(Constants.API_BASE_URL)
                                        .header("Authorization", "Bearer " + Constants.API_TOKEN)
@@ -51,7 +51,7 @@ public class UserController {
 
     @Step("Create user")
     public User createUser(User user) {
-        logger.info("Create user" + user.getName());
+        logger.info("Create user {}", user.getName());
         Response response = RestAssured
                 .given()
                 .baseUri(Constants.API_BASE_URL)
@@ -67,8 +67,8 @@ public class UserController {
         return response.jsonPath().getObject("", User.class);
     }
 
-
     public void deleteUserById(int userId) {
+        logger.info("Delete user {}", userId);
         Response response = RestAssured
                 .given()
                 .baseUri(Constants.API_BASE_URL)
