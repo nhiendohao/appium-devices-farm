@@ -45,9 +45,8 @@ public class UserController {
         if (response.statusCode() != 200) {
             throw new Error("Failed to retrieve user " + userId);
         }
-        return response.jsonPath().getObject("", User.class);
+        return new Gson().fromJson(response.prettyPrint(), User.class);
     }
-
 
     @Step("Create user")
     public User createUser(User user) {
