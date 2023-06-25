@@ -32,7 +32,7 @@ public class GoogleHomePage extends PageObject {
         AllureReportHelper.attachScreenshot(driver);
     }
 
-    @Step("Search for keyword")
+    @Step("Search for keyword {keyword}")
     public void searchFor(String keyword) {
         enter(searchBar, keyword);
         searchBar.sendKeys(Keys.ENTER);
