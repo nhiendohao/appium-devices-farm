@@ -23,9 +23,9 @@ import io.qameta.allure.Story;
 
 @Tags({
         @Tag("Regression"),
-        @Tag("User"),
+        @Tag("ApiUser"),
 })
-public class UserTest {
+public class ApiUserTest {
     UserController userController;
     User user;
 

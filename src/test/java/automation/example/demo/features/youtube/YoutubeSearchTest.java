@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import automation.example.demo.basetest.BaseMobileTest;
 import automation.example.demo.drivermanager.DriverManager;
-import automation.example.demo.features.search.ui.pages.GooglePage;
 import automation.example.demo.features.youtube.ui.pages.YoutubeHomePage;
 import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
