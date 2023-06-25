@@ -1,5 +1,6 @@
 package automation.example.demo.features.google;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
@@ -29,6 +30,7 @@ public class GoogleHomeSearchTest extends BaseWebTest {
     @ParameterizedTest
     @ValueSource(strings = { "Elephant", "Dog"})
     @Link(name = "TC-001", type = "mylink")
+    @DisplayName("TC10011: google search")
     public void verifyCorrespondingResultDisplaysWhenSearchingForAnimal(String animal) {
         googleHomePage = new GoogleHomePage(driver);
         googleHomePage.openApplication();
@@ -40,6 +42,7 @@ public class GoogleHomeSearchTest extends BaseWebTest {
     @Description("Verify corresponding result displays when searching for fruit")
     @Story("Google Page")
     @Link(name = "TC-002", type = "mylink")
+    @DisplayName("TC10012: google search")
     public void verifyCorrespondingResultDisplaysWhenSearchingForFruit() {
         googleHomePage = new GoogleHomePage(driver);
         googleHomePage.openApplication();
@@ -51,6 +54,7 @@ public class GoogleHomeSearchTest extends BaseWebTest {
     @Description("Verify Google Logo")
     @Story("Google Page")
     @Link(name = "TC-003", type = "mylink")
+    @DisplayName("TC10013: google search")
     public void verifyGoogleLogo() {
         googleHomePage = new GoogleHomePage(driver);
         googleHomePage.openApplication();

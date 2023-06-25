@@ -8,6 +8,7 @@ import static org.hamcrest.Matchers.notNullValue;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
@@ -43,6 +44,7 @@ public class ApiUserTest {
     @Test
     @Description("Verify user is created successfully")
     @Story("UserStory")
+    @DisplayName("TC10022: create user")
     @Issue("123")
     @Link(name = "TC-001", type = "mylink")
     public void verifyUserIsCreatedSuccessfully() {
