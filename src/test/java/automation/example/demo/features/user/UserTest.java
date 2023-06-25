@@ -2,6 +2,10 @@ package automation.example.demo.features.user;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
+
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -36,12 +40,21 @@ public class UserTest {
     @Description("Verify user is created successfully")
     @Story("User")
     public void verifyUserIsCreatedSuccessfully() {
-        String randomNumber =  RandomUtils.generateRandomNumber(10);
+        String randomNumber = RandomUtils.generateRandomNumber(10);
 
         user.setEmail(randomNumber + user.getEmail());
-        User userResponse = userController.createUser(user);
+        User createUserResponse = userController.createUser(user);
 
-        assertThat(userResponse.getName(), equalTo(user.getName()));
-        assertThat(userResponse.getGender(), equalTo(user.getGender()));
+        assertThat(createUserResponse.getName(), equalTo(user.getName()));
+        assertThat(createUserResponse.getGender(), equalTo(user.getGender()));
+
+        User retrieveUserResponse = userController.getUserById(createUserResponse.getId());
+        assertThat(retrieveUserResponse.getName(), is(retrieveUserResponse.getName()));
+        assertThat(retrieveUserResponse.getStatus(), is(retrieveUserResponse.getStatus()));
+
+        List<User> users = userController.getUsers();
+        assertThat(users.get(0).getName(), notNullValue());
+
+        userController.deleteUserById(createUserResponse.getId());
     }
 }
