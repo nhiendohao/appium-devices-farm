@@ -26,13 +26,13 @@ public class GoogleHomeSearchTest extends BaseWebTest {
     GoogleHomePage googleHomePage;
 
     @Severity(SeverityLevel.NORMAL)
-    @ParameterizedTest
-    @ValueSource(strings = { "Elephant", "Dog"})
     @Link(name = "Google Link", url = "https://www.googgle.com")
     @TmsLink("TC10011")
     @Story("Search for animal")
     @DisplayName("TC10011: google search")
     @Description("Verify corresponding result displays when searching for animal")
+    @ParameterizedTest
+    @ValueSource(strings = { "Elephant", "Dog"})
     public void verifyCorrespondingResultDisplaysWhenSearchingForAnimal(String animal) {
         googleHomePage = new GoogleHomePage(driver);
         googleHomePage.openApplication();
@@ -40,12 +40,12 @@ public class GoogleHomeSearchTest extends BaseWebTest {
     }
 
     @Severity(SeverityLevel.NORMAL)
-    @Test
     @TmsLink("TC10012")
     @Link(name = "Google Link", url = "https://www.googgle.com")
     @Story("Search for fruit")
     @DisplayName("TC10012: google search")
     @Description("Verify corresponding result displays when searching for fruit")
+    @Test
     public void verifyCorrespondingResultDisplaysWhenSearchingForFruit() {
         googleHomePage = new GoogleHomePage(driver);
         googleHomePage.openApplication();
@@ -53,11 +53,11 @@ public class GoogleHomeSearchTest extends BaseWebTest {
     }
 
     @Severity(SeverityLevel.NORMAL)
-    @Test
     @TmsLink("TC10013")
     @Link(name = "Google Link", url = "https://www.googgle.com")
     @DisplayName("TC10013: google search")
     @Description("Verify Google Logo")
+    @Test
     public void verifyGoogleLogo() {
         googleHomePage = new GoogleHomePage(driver);
         googleHomePage.openApplication();

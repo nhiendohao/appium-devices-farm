@@ -24,12 +24,12 @@ public class GoogleSearchTest extends BaseWebTest {
     GooglePage googlePage;
 
     @Severity(SeverityLevel.NORMAL)
-    @Test
     @TmsLink("TC10014")
     @Link(name = "GoogleLink", url = "https://www.googgle.com")
     @Story("Search for animal")
     @DisplayName("TC10014: google search")
     @Description("Verify corresponding result displays when searching for animal")
+    @Test
     public void verifyCorrespondingResultDisplaysWhenSearchingForAnimal() {
         googlePage = new GooglePage(driver);
         googlePage.openApplication();
@@ -37,13 +37,13 @@ public class GoogleSearchTest extends BaseWebTest {
     }
 
     @Severity(SeverityLevel.NORMAL)
-    @Test
     @Story("Search for animal")
     @TmsLink("TC10015")
     @Link(name = "GoogleLink", url = "https://www.googgle.com")
     @Story("Search for fruit")
     @DisplayName("TC10015: google search")
     @Description("Verify corresponding result displays when searching for fruit")
+    @Test
     public void verifyCorrespondingResultDisplaysWhenSearchingForFruit() {
         googlePage = new GooglePage(driver);
         googlePage.openApplication();
@@ -51,12 +51,12 @@ public class GoogleSearchTest extends BaseWebTest {
     }
 
     @Severity(SeverityLevel.NORMAL)
-    @Test
     @TmsLink("TC10013")
     @Link(name = "GoogleLink", url = "https://www.googgle.com")
     @Story("Search for animal")
     @DisplayName("TC10016: google search")
     @Description("Verify Google Logo")
+    @Test
     public void verifyGoogleLogo() {
         googlePage = new GooglePage(driver);
         googlePage.openApplication();

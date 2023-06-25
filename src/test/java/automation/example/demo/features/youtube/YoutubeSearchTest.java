@@ -28,9 +28,9 @@ public class YoutubeSearchTest extends BaseMobileTest {
     YoutubeHomePage youtubeHomePage;
 
     @Severity(SeverityLevel.NORMAL)
-    @Test
     @Description("Verify corresponding result displays when searching for U17")
     @Story("Youtube")
+    @Test
     public void verifyCorrespondingResultDisplaysWhenSearchingForU17() {
         youtubeHomePage = new YoutubeHomePage(appiumDriver);
         youtubeHomePage.searchFor("u17 viet nam");
@@ -38,9 +38,9 @@ public class YoutubeSearchTest extends BaseMobileTest {
     }
 
     @Severity(SeverityLevel.NORMAL)
-    @Test
     @Description("Verify corresponding result displays when searching for U23")
     @Story("Youtube")
+    @Test
     public void verifyCorrespondingResultDisplaysWhenSearchingForU23() {
         youtubeHomePage = new YoutubeHomePage(appiumDriver);
         youtubeHomePage.searchFor("u23 viet nam");
