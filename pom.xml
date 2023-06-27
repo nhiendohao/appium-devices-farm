@@ -35,6 +35,10 @@
     <aspectj.version>1.9.6</aspectj.version>
     <lombok.version>1.18.28</lombok.version>
 
+    <testrail.projectId>319</testrail.projectId>
+    <testrail.runId></testrail.runId>
+    <testrail.suiteId>34015</testrail.suiteId>
+    <testrail.run>false</testrail.run>
     <appium.udid>QV780HN49H</appium.udid>
     <webdriver.driver>chrome</webdriver.driver>
     <webdriver.remoteurl>http://localhost:4444/wd/hub</webdriver.remoteurl>
@@ -198,6 +202,10 @@
             <baseurl>${baseurl}</baseurl>
             <api.baseurl>${api.baseurl}</api.baseurl>
             <api.token>${api.token}</api.token>
+            <testrail.projectId>${testrail.projectId}</testrail.projectId>
+            <testrail.runId>${testrail.runId}</testrail.runId>
+            <testrail.suiteId>${testrail.suiteId}</testrail.suiteId>
+            <testrail.run>${testrail.run}</testrail.run>
           </systemPropertyVariables>
         </configuration>
 

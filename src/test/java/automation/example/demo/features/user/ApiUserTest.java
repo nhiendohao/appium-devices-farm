@@ -38,7 +38,7 @@ public class ApiUserTest {
     @BeforeEach
     public void beforeTest() {
         userController = new UserController();
-        user = DataLoaderUtils.loadTestData("user", User.class);
+        user = DataLoaderUtils.loadTestData("user.json", User.class);
     }
 
     @Severity(SeverityLevel.NORMAL)
@@ -47,7 +47,7 @@ public class ApiUserTest {
     @Issue("TC10022")
     @TmsLink("TC10022")
     @Link(name = "GoogleLink", url = "https://www.googgle.com")
-    @DisplayName("TC10022: create user")
+    @DisplayName("TestCaseId: C53986860 create user")
     @Description("Verify user is created successfully")
     public void verifyUserIsCreatedSuccessfully() {
         String randomNumber = RandomUtils.generateRandomNumber(10);
