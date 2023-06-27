@@ -28,9 +28,11 @@ public class FileUtils {
 
     public static File findFileByName(String folderDirectory, String fileName) {
         try {
-            return Files.find(Paths.get(folderDirectory), Integer.MAX_VALUE, (p, basicFileAttributes)
-                            -> FilenameUtils.removeExtension(p.getFileName().toString()).equalsIgnoreCase(fileName))
-                    .findFirst().get().toFile();
+            return Files.find(
+                                Paths.get(folderDirectory), Integer.MAX_VALUE,
+                                (path, basicFileAttributes) -> FilenameUtils.getName(
+                                        path.getFileName().toString()).equalsIgnoreCase(fileName))
+                        .findFirst().get().toFile();
         } catch (IOException exception) {
             throw new RuntimeException(folderDirectory + " can't be found!");
         }

@@ -39,7 +39,7 @@ public class ApiUserParameterizeTest {
 
     static Stream<User> dataProvider() {
         User[] users = DataLoaderUtils.loadDataArrayProvider(
-                User.class, "user", "user2");
+                User.class, "user.json", "user2.json");
         return Stream.of(users);
     }
 
