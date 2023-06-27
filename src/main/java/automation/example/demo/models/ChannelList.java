@@ -4,7 +4,7 @@ import static automation.example.demo.constants.Constants.CHANNEL_LIST_FILE_PATH
 
 import java.util.Map;
 
-import automation.example.demo.utils.DataLoaderUtils;
+import helpers.DataLoaderHelper;
 import lombok.Data;
 
 @Data
@@ -14,7 +14,7 @@ public class ChannelList {
 
     public static synchronized ChannelList getInstance() {
         if (instance == null) {
-            instance = DataLoaderUtils.loadDataFromSource(CHANNEL_LIST_FILE_PATH, ChannelList.class);
+            instance = DataLoaderHelper.loadDataFromSource(CHANNEL_LIST_FILE_PATH, ChannelList.class);
         }
         return instance;
     }

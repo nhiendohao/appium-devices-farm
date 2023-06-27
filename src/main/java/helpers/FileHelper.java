@@ -1,4 +1,4 @@
-package automation.example.demo.utils;
+package helpers;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,7 +10,7 @@ import java.util.List;
 
 import org.apache.commons.io.FilenameUtils;
 
-public class FileUtils {
+public class FileHelper {
     public static List<File> getFileListFromDirectoryPath(String directoryPath) {
         File directory = new File(directoryPath);
         List<File> resultList = new ArrayList<File>();

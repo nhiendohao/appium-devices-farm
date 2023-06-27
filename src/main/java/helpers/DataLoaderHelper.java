@@ -1,4 +1,4 @@
-package automation.example.demo.utils;
+package helpers;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,14 +14,12 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import net.bytebuddy.asm.Advice.OffsetMapping.Target.ForField.ReadWrite;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 
 import automation.example.demo.constants.Constants;
 
-public class DataLoaderUtils {
+public class DataLoaderHelper {
     public static <T> T loadDataFromSource(String resourceName, Class<T> objectClass) {
         // sourceName = "path/to/file" under resources folder, for example: "./testdata/animal.json"
         InputStream inputStream = getResourceAsStream(resourceName, objectClass);
@@ -51,7 +49,7 @@ public class DataLoaderUtils {
         final List<T> objects = new ArrayList<>();
 
         try {
-            final File dataFile = FileUtils.findFileByName(Constants.JSON_DATA_DIRECTORY_PATH, fileName);
+            final File dataFile = FileHelper.findFileByName(Constants.JSON_DATA_DIRECTORY_PATH, fileName);
             final InputStream inputStream = new FileInputStream(dataFile);
             final Reader reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
             final JsonArray jsonArray = new Gson().fromJson(reader, JsonArray.class);
@@ -79,7 +77,7 @@ public class DataLoaderUtils {
     public static <T> T loadTestData(String fileName, Class<T> objectClass) {
         T object;
         try {
-            final File dataFile = FileUtils.findFileByName(Constants.JSON_DATA_DIRECTORY_PATH, fileName);
+            final File dataFile = FileHelper.findFileByName(Constants.JSON_DATA_DIRECTORY_PATH, fileName);
             final InputStream inputStream = new FileInputStream(dataFile);;
             Reader reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
             object = new Gson().fromJson(reader, objectClass);
@@ -94,7 +92,7 @@ public class DataLoaderUtils {
         List<Object> fileList = new ArrayList<>();
         Arrays.asList(fileNames)
                 .forEach(fileName -> fileList.add(
-                        FileUtils.findFileByName(Constants.JSON_DATA_DIRECTORY_PATH, fileName)));
+                        FileHelper.findFileByName(Constants.JSON_DATA_DIRECTORY_PATH, fileName)));
         return fileList.stream()
                 .map(obj -> new Object[]{obj})
                 .collect(Collectors.toList());

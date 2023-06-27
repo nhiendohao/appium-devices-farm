@@ -1,8 +1,8 @@
-package automation.example.demo.utils;
+package helpers;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
-public class RandomUtils {
+public class RandomHelper {
     public static String generateRandomNumber(int i) {
         return RandomStringUtils.randomNumeric(10);
     }

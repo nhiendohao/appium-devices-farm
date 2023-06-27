@@ -12,14 +12,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import automation.example.demo.features.user.api.UserController;
 import automation.example.demo.models.User;
-import automation.example.demo.utils.DataLoaderUtils;
-import automation.example.demo.utils.RandomUtils;
+import helpers.DataLoaderHelper;
+import helpers.RandomHelper;
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Issue;
@@ -38,7 +37,7 @@ public class ApiUserParameterizeTest {
     UserController userController;
 
     static Stream<User> dataProvider() {
-        User[] users = DataLoaderUtils.loadDataArrayProvider(
+        User[] users = DataLoaderHelper.loadDataArrayProvider(
                 User.class, "user.json", "user2.json");
         return Stream.of(users);
     }
@@ -58,7 +57,7 @@ public class ApiUserParameterizeTest {
     @ParameterizedTest
     @MethodSource("dataProvider")
     public void verifyUserIsCreatedSuccessfully(User user) {
-        String randomNumber = RandomUtils.generateRandomNumber(10);
+        String randomNumber = RandomHelper.generateRandomNumber(10);
 
         user.setEmail(randomNumber + user.getEmail());
         User createUserResponse = userController.createUser(user);
