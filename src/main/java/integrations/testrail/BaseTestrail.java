@@ -3,6 +3,9 @@ package integrations.testrail;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
 import io.restassured.response.Response;
 
 public class BaseTestrail {
@@ -20,12 +23,14 @@ public class BaseTestrail {
             client.AddResultForCase(runId, testCaseId, data);
         } else if (statusId.equals("5")) {
             Response response = client.AddResultForCase(runId, testCaseId, data);
-            String resultId = "";
+            // Get resultId for attaching image to failed result
+            JsonObject jsonObject = new Gson().fromJson(response.prettyPrint(), JsonObject.class);
+            String resultId = jsonObject.get("id").getAsString();;
             client.attachImageToCase(resultId);
         }
     }
 
-    public Map getTestStatus(TestStatus testStatus) {
+    public Map getTestResult(TestStatus testStatus) {
         String status_id = "";
         String status_message = "";
 

@@ -78,13 +78,13 @@ public class APIClient {
                 .header("Authorization", "Basic " + auth)
                 .header("Content-Type", "multipart/form-data")
                 .when().log().all()
-                .multiPart("file", new File("src/test/resources/media/image/example_brown.png"))
+                .multiPart("attachment", new File("src/test/resources/media/image/example_brown.png"))
                 .post(String.format("index.php?/api/v2/add_attachment_to_result/%s", resultId));
 
         if (response.statusCode() == 200) {
-            System.out.println("Attach image to " + resultId + " on Testrail Testrail.");
+            System.out.println("Attach image to test result " + resultId + " on Testrail.");
         } else {
-            System.out.println("Failed to Attach image to " + resultId + " on Testrail Testrail.");
+            System.out.println("Failed to Attach image to test result " + resultId + " on Testrail.");
         }
         return response;
     }

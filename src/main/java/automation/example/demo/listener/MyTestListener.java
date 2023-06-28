@@ -47,37 +47,39 @@ public class MyTestListener implements TestExecutionListener {
     public void executionFinished(TestIdentifier testIdentifier, TestExecutionResult testExecutionResult) {
         TestExecutionListener.super.executionFinished(testIdentifier, testExecutionResult);
 
+        // Update test results if isRun=true
         if (TestrailConfig.isRun) {
             if (testIdentifier.isTest()) {
                 String runId = TestrailConfig.runId;
+
+                // Get caseId use
                 String testCaseIdRegex = "\\bC(\\d+)\\b";
                 String inputString = testIdentifier.getDisplayName();
                 List<String> caseIds = new ArrayList<>();
-
                 Pattern pattern = Pattern.compile(testCaseIdRegex);
                 Matcher matcher = pattern.matcher(inputString);
+
                 while (matcher.find()) {
                     String caseId = matcher.group();
                     caseIds.add(caseId);
                 }
 
+                String testcaseId = caseIds.get(0).substring(1);
+
+                // Create test run if runId is blank
                 BaseTestrail baseTestrail = new BaseTestrail();
                 if (runId.equals("")) {
                     runId = baseTestrail.addTestRun(TestrailConfig.projectId, TestrailConfig.suiteId,
                                                     "Selenium Regression Test Demo");
                 }
 
-                String testcaseId = caseIds.get(0).substring(1);
-                if (testExecutionResult.getStatus().equals(Status.SUCCESSFUL)) {
-                    Map data = baseTestrail.getTestStatus(TestStatus.SUCCESS);
-                    baseTestrail.addResultForCase(runId, testcaseId, data);
-                } else {
-                    Map data = baseTestrail.getTestStatus(TestStatus.FAILURE);
-                    baseTestrail.addResultForCase(runId, testcaseId, data);
-                }
+                // Update test results to Testrail
+                TestStatus testStatus = testExecutionResult.getStatus().equals(Status.SUCCESSFUL)
+                                        ? TestStatus.SUCCESS : TestStatus.FAILURE;
+                Map testResult = baseTestrail.getTestResult(testStatus);
+                baseTestrail.addResultForCase(runId, testcaseId, testResult);
             }
         }
-
     }
 
     @Override
