@@ -39,6 +39,8 @@
     <testrail.runId></testrail.runId>
     <testrail.suiteId>34015</testrail.suiteId>
     <testrail.run>false</testrail.run>
+
+    <test.environment></test.environment>
     <appium.udid>QV780HN49H</appium.udid>
     <webdriver.driver>chrome</webdriver.driver>
     <webdriver.remoteurl>http://localhost:4444/wd/hub</webdriver.remoteurl>
@@ -199,9 +201,12 @@
             <appium.udid>${appium.udid}</appium.udid>
             <webdriver.driver>${webdriver.driver}</webdriver.driver>
             <webdriver.remoteurl>${webdriver.remoteurl}</webdriver.remoteurl>
+            <test.environment>${test.environment}</test.environment>
+
             <baseurl>${baseurl}</baseurl>
             <api.baseurl>${api.baseurl}</api.baseurl>
             <api.token>${api.token}</api.token>
+
             <testrail.projectId>${testrail.projectId}</testrail.projectId>
             <testrail.runId>${testrail.runId}</testrail.runId>
             <testrail.suiteId>${testrail.suiteId}</testrail.suiteId>
