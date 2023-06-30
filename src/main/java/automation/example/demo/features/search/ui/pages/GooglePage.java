@@ -1,5 +1,6 @@
 package automation.example.demo.features.search.ui.pages;
 
+import static automation.example.demo.config.BaseConfig.getBaseConfig;
 import static org.junit.Assert.assertTrue;
 
 import org.openqa.selenium.By;
@@ -24,7 +25,7 @@ public class GooglePage extends PageObject {
 
     @Step("Open Google page")
     public void openApplication() {
-        navigateTo(System.getProperty("baseurl"));
+        navigateTo(getBaseConfig().getEnvironment().getBaseUrl());
         AllureReportHelper.attachScreenshot(driver);
     }
 

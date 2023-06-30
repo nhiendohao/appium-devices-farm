@@ -7,8 +7,4 @@ public class Constants {
 
     public static final String CHANNEL_LIST_FILE_PATH = "./testdata/json/channel_list.json";
 
-    public static final String BASE_URL = System.getProperty("baseurl");
-    public static final String API_BASE_URL = System.getProperty("api.baseurl");
-    public static final String API_TOKEN = System.getProperty("api.token");
-
 }

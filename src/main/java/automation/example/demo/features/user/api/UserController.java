@@ -1,5 +1,7 @@
 package automation.example.demo.features.user.api;
 
+import static automation.example.demo.config.BaseConfig.getBaseConfig;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 
-import automation.example.demo.constants.Constants;
 import automation.example.demo.models.User;
 import io.qameta.allure.Step;
 import io.restassured.RestAssured;
@@ -18,11 +19,13 @@ import io.restassured.response.Response;
 
 public class UserController {
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+    private final String baseApiUrl = getBaseConfig().getEnvironment().getBaseApiUrl();
+    private final String apiToken = getBaseConfig().getEnvironment().getApiToken();
 
     public List<User> getUsers() {
         logger.info("Retrieve all users");
         Response response = RestAssured.given()
-                                       .baseUri(Constants.API_BASE_URL)
+                                       .baseUri(this.baseApiUrl)
                                        .when().log().all()
                                        .get("/public/v2/users");
         if (response.statusCode() != 200) {
@@ -37,8 +40,10 @@ public class UserController {
     public User getUserById(int userId) {
         logger.info("Retrieve user by userId {}", + userId);
         Response response = RestAssured.given()
-                                       .baseUri(Constants.API_BASE_URL)
-                                       .header("Authorization", "Bearer " + Constants.API_TOKEN)
+                                       .baseUri(this.baseApiUrl)
+                                       .header(
+                                               "Authorization",
+                                               "Bearer " + this.apiToken)
                                        .when().log().all()
                                        .get(String.format("/public/v2/users/%s", userId));
 
@@ -53,8 +58,10 @@ public class UserController {
         logger.info("Create user {}", user.getName());
         Response response = RestAssured
                 .given()
-                .baseUri(Constants.API_BASE_URL)
-                .header("Authorization", "Bearer " + Constants.API_TOKEN)
+                .baseUri(this.baseApiUrl)
+                .header(
+                        "Authorization",
+                        "Bearer " + this.apiToken)
                 .contentType("application/json")
                 .when().log().all()
                 .body(new Gson().toJson(user))
@@ -70,8 +77,10 @@ public class UserController {
         logger.info("Delete user {}", userId);
         Response response = RestAssured
                 .given()
-                .baseUri(Constants.API_BASE_URL)
-                .header("Authorization", "Bearer " + Constants.API_TOKEN)
+                .baseUri(this.baseApiUrl)
+                .header(
+                        "Authorization",
+                        "Bearer " + this.apiToken)
                 .when().log().all()
                 .delete(String.format("/public/v2/users/%s", userId));
 

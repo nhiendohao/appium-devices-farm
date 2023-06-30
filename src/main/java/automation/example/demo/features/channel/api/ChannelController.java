@@ -1,5 +1,6 @@
 package automation.example.demo.features.channel.api;
 
+import static automation.example.demo.config.BaseConfig.getBaseConfig;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -9,17 +10,18 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
-import automation.example.demo.constants.Constants;
 import automation.example.demo.models.Channel;
 import io.qameta.allure.Step;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
 public class ChannelController {
+    private final String baseApiUrl = getBaseConfig().getEnvironment().getBaseApiUrl();
+
     @Step("Create Channel by API")
     public void createChannelByAPI(Channel channel) {
         RestAssured.given()
-                   .baseUri(Constants.API_BASE_URL)
+                   .baseUri(this.baseApiUrl)
                    .contentType("application/json")
                    .when()
                    .log().all()
@@ -30,7 +32,7 @@ public class ChannelController {
     @Step("Get Channel by API")
     public void getChannelByAPI(String channelId, String channelName) {
         RestAssured.given()
-                   .baseUri(Constants.API_BASE_URL)
+                   .baseUri(this.baseApiUrl)
                    .pathParams("channelId", channelId, "channelName", channelName, "pageNum", 0, "pageSize", 10)
                    .when()
                    .log().all()
@@ -41,7 +43,7 @@ public class ChannelController {
     @Step("Delete Channel by API")
     public void deleteChannelByAPI(String channelId) {
         RestAssured.given()
-                   .baseUri(Constants.API_BASE_URL)
+                   .baseUri(this.baseApiUrl)
                    .pathParam("channelId", channelId)
                    .when()
                    .log().all()
