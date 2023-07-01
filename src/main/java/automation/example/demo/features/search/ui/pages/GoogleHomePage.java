@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import automation.example.demo.drivermanager.appiumdriver.models.Direction;
 import automation.example.demo.pageobject.PageObject;
 import helpers.AllureReportHelper;
 import io.qameta.allure.Step;

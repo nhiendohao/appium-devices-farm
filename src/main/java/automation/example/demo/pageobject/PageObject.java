@@ -1,6 +1,8 @@
 package automation.example.demo.pageobject;
 
 import java.time.Duration;
+import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -59,6 +61,14 @@ public abstract class PageObject {
         return element.isDisplayed();
     }
 
+    public void waitForABit(int seconds){
+        try {
+            Thread.sleep(seconds * 1000L);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
+    }
+
     public boolean isElementPresent(WebElement element) {
         return element.isDisplayed();
     }
@@ -108,9 +118,40 @@ public abstract class PageObject {
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
+    /**
+     * Explicit wait is wait for specific element loaded with condition, it is local wait.
+     */
     public void waitUntilElementClickable(By element, int timeOut) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeOut));
         wait.until(ExpectedConditions.elementToBeClickable((element)));
+    }
+
+    /**
+     * Implicit wait is wait for elements loaded, it is global wait
+     */
+    public boolean isElementPresent(WebElement element, int timeOut) {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(timeOut));
+        try {
+            return element.isDisplayed();
+        } catch (NoSuchElementException ex) {
+            System.out.println("Element is not present.");
+            return false;
+        } finally {
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+        }
+    }
+
+    public boolean isElementNotPresent(By element, int timeOut) {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(timeOut));
+        try {
+            int size = driver.findElements(element).size();
+            return size < 1;
+        } catch (NoSuchElementException ex) {
+            System.out.println("Element is not present.");
+            return false;
+        } finally {
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+        }
     }
 
 }
