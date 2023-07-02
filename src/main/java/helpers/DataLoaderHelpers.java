@@ -19,7 +19,7 @@ import com.google.gson.JsonArray;
 
 import automation.example.demo.constants.Constants;
 
-public class DataLoaderHelper {
+public class DataLoaderHelpers {
     public static <T> T loadDataFromSource(String resourceName, Class<T> objectClass) {
         // sourceName = "path/to/file" under resources folder, for example: "./testdata/animal.json"
         InputStream inputStream = getResourceAsStream(resourceName, objectClass);
@@ -49,7 +49,7 @@ public class DataLoaderHelper {
         final List<T> objects = new ArrayList<>();
 
         try {
-            final File dataFile = FileHelper.findFileByName(Constants.RESOURCE_TEST_DATA_PATH, fileName);
+            final File dataFile = FileHelpers.findFileByName(Constants.RESOURCE_TEST_DATA_PATH, fileName);
             final InputStream inputStream = new FileInputStream(dataFile);
             final Reader reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
             final JsonArray jsonArray = new Gson().fromJson(reader, JsonArray.class);
@@ -77,7 +77,7 @@ public class DataLoaderHelper {
     public static <T> T loadTestData(String fileName, Class<T> objectClass) {
         T object;
         try {
-            final File dataFile = FileHelper.findFileByName(Constants.RESOURCE_TEST_DATA_PATH, fileName);
+            final File dataFile = FileHelpers.findFileByName(Constants.RESOURCE_TEST_DATA_PATH, fileName);
             final InputStream inputStream = new FileInputStream(dataFile);;
             Reader reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
             object = new Gson().fromJson(reader, objectClass);
@@ -92,7 +92,7 @@ public class DataLoaderHelper {
         List<Object> fileList = new ArrayList<>();
         Arrays.asList(fileNames)
                 .forEach(fileName -> fileList.add(
-                        FileHelper.findFileByName(Constants.RESOURCE_TEST_DATA_PATH, fileName)));
+                        FileHelpers.findFileByName(Constants.RESOURCE_TEST_DATA_PATH, fileName)));
         return fileList.stream()
                 .map(obj -> new Object[]{obj})
                 .collect(Collectors.toList());

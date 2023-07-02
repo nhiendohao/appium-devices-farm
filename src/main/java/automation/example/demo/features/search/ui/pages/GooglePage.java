@@ -8,7 +8,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
 import automation.example.demo.pageobject.PageObject;
-import helpers.AllureReportHelper;
+import helpers.AllureReportHelpers;
 import io.qameta.allure.Step;
 
 public class GooglePage extends PageObject {
@@ -26,7 +26,7 @@ public class GooglePage extends PageObject {
     @Step("Open Google page")
     public void openApplication() {
         navigateTo(getBaseConfig().getEnvironment().getBaseUrl());
-        AllureReportHelper.attachScreenshot(driver);
+        AllureReportHelpers.attachScreenshot(driver);
     }
 
     @Step("Search for keyword {keyword}")

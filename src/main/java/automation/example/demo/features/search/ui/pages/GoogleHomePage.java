@@ -8,9 +8,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import automation.example.demo.drivermanager.appiumdriver.models.Direction;
 import automation.example.demo.pageobject.PageObject;
-import helpers.AllureReportHelper;
+import helpers.AllureReportHelpers;
 import io.qameta.allure.Step;
 
 public class GoogleHomePage extends PageObject {
@@ -31,7 +30,7 @@ public class GoogleHomePage extends PageObject {
     @Step("Open Google page")
     public void openApplication() {
         navigateTo(getBaseConfig().getEnvironment().getBaseUrl());
-        AllureReportHelper.attachScreenshot(driver);
+        AllureReportHelpers.attachScreenshot(driver);
     }
 
     @Step("Search for keyword {keyword}")

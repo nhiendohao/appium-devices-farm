@@ -17,8 +17,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import automation.example.demo.features.user.api.UserController;
 import automation.example.demo.models.User;
-import helpers.DataLoaderHelper;
-import helpers.RandomHelper;
+import helpers.DataLoaderHelpers;
+import helpers.StringHelpers;
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Issue;
@@ -37,7 +37,7 @@ public class ApiUserParameterizeTest {
     UserController userController;
 
     static Stream<User> dataProvider() {
-        User[] users = DataLoaderHelper.loadDataArrayProvider(
+        User[] users = DataLoaderHelpers.loadDataArrayProvider(
                 User.class, "user.json", "user2.json");
         return Stream.of(users);
     }
@@ -57,7 +57,7 @@ public class ApiUserParameterizeTest {
     @ParameterizedTest
     @MethodSource("dataProvider")
     public void verifyUserIsCreatedSuccessfully(User user) {
-        String randomNumber = RandomHelper.generateRandomNumber(10);
+        String randomNumber = StringHelpers.generateRandomNumber(10);
 
         user.setEmail(randomNumber + user.getEmail());
         User createUserResponse = userController.createUser(user);

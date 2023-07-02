@@ -3,7 +3,7 @@ package automation.example.demo.drivermanager.appiumdriver.models;
 import java.util.Map;
 
 import automation.example.demo.constants.Constants;
-import helpers.DataLoaderHelper;
+import helpers.DataLoaderHelpers;
 import lombok.Data;
 
 @Data
@@ -17,7 +17,7 @@ public class DeviceCapabilitiesList {
     public static DeviceCapabilitiesList getInstance() {
         if (instance == null) {
             synchronized (DeviceCapabilitiesList.class) {
-                instance = DataLoaderHelper.loadDataFromSource(
+                instance = DataLoaderHelpers.loadDataFromSource(
                         Constants.DEVICE_CAPABILITIES_FILE_PATH,
                         DeviceCapabilitiesList.class);
             }

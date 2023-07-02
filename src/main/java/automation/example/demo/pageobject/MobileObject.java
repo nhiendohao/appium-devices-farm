@@ -172,14 +172,14 @@ public class MobileObject extends PageObject{
         Set<String> contextNames = contextAware.getContextHandles();
         System.out.println(contextNames);
         boolean success = false;
-        int retries = 0;
-        while (retries < 10 && !success) {
+        int retries = 10;
+        while (retries > 1 && !success) {
             WebDriver contextDriver = contextAware.context(context);
             if (contextDriver != null) {
                 success = true;
             }
             waitForABit(2);
-            retries++;
+            retries--;
         }
     }
 

@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 
 import io.qameta.allure.Allure;
 
-public class AllureReportHelper {
+public class AllureReportHelpers {
 
     public static void attachScreenshot(WebDriver driver) {
         Allure.addAttachment(

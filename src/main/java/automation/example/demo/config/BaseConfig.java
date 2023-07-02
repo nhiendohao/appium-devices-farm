@@ -5,7 +5,7 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 
 import automation.example.demo.constants.Constants;
-import helpers.DataLoaderHelper;
+import helpers.DataLoaderHelpers;
 import lombok.Data;
 
 public class BaseConfig {
@@ -17,7 +17,7 @@ public class BaseConfig {
     public static BaseConfig getBaseConfig() {
         if (baseConfig == null) {
             synchronized (BaseConfig.class) {
-                baseConfig = DataLoaderHelper.loadDataFromSource(Constants.RESOURCE_BASE_CONFIG_PATH, BaseConfig.class);
+                baseConfig = DataLoaderHelpers.loadDataFromSource(Constants.RESOURCE_BASE_CONFIG_PATH, BaseConfig.class);
             }
         }
         return baseConfig;

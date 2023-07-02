@@ -15,8 +15,8 @@ import org.junit.jupiter.api.Test;
 
 import automation.example.demo.features.user.api.UserController;
 import automation.example.demo.models.User;
-import helpers.DataLoaderHelper;
-import helpers.RandomHelper;
+import helpers.DataLoaderHelpers;
+import helpers.StringHelpers;
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Issue;
@@ -38,7 +38,7 @@ public class ApiUserTest {
     @BeforeEach
     public void beforeTest() {
         userController = new UserController();
-        user = DataLoaderHelper.loadTestData("user.json", User.class);
+        user = DataLoaderHelpers.loadTestData("user.json", User.class);
     }
 
     @Severity(SeverityLevel.NORMAL)
@@ -50,7 +50,7 @@ public class ApiUserTest {
     @DisplayName("TestCaseId: C53986860 create user")
     @Description("Verify user is created successfully")
     public void verifyUserIsCreatedSuccessfully() {
-        String randomNumber = RandomHelper.generateRandomNumber(10);
+        String randomNumber = StringHelpers.generateRandomNumber(10);
 
         user.setEmail(randomNumber + user.getEmail());
         User createUserResponse = userController.createUser(user);
