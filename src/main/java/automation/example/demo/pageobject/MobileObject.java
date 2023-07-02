@@ -3,11 +3,10 @@ package automation.example.demo.pageobject;
 import static java.time.Duration.ofMillis;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.ContextAware;
 import org.openqa.selenium.Point;
@@ -182,5 +181,4 @@ public class MobileObject extends PageObject{
             retries--;
         }
     }
-
 }

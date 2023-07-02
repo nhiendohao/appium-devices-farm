@@ -1,6 +1,7 @@
 package automation.example.demo.pageobject;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -154,4 +155,15 @@ public abstract class PageObject {
         }
     }
 
+    public void switchToWindow(int index) {
+        List<String> tabs = new ArrayList<>(driver.getWindowHandles());
+        System.out.println("windowName: " + tabs);
+        driver.switchTo().window(tabs.get(1));
+    }
+
+    public void switchToWindow(String windowName) {
+        List<String> tabs = new ArrayList<>(driver.getWindowHandles());
+        System.out.println("WindowName: " + tabs);
+        driver.switchTo().window(windowName);
+    }
 }
