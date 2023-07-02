@@ -75,7 +75,6 @@ public class UserController {
         return response.jsonPath().getObject("", User.class);
     }
 
-
     @Step("Delete user by userId {userId}")
     public void deleteUserById(int userId) {
         logger.info("Delete user {}", userId);
