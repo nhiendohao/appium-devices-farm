@@ -46,6 +46,7 @@ public class MyTestListener implements TestExecutionListener {
     @Override
     public void executionFinished(TestIdentifier testIdentifier, TestExecutionResult testExecutionResult) {
         TestExecutionListener.super.executionFinished(testIdentifier, testExecutionResult);
+        System.out.println(testIdentifier.getDisplayName());
 
         // Update test results if isRun=true
         if (TestrailConfig.isRun) {

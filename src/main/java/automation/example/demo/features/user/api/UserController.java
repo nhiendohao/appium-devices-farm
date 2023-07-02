@@ -22,6 +22,7 @@ public class UserController {
     private final String baseApiUrl = getBaseConfig().getEnvironment().getBaseApiUrl();
     private final String apiToken = getBaseConfig().getEnvironment().getApiToken();
 
+    @Step("Retrieve all users")
     public List<User> getUsers() {
         logger.info("Retrieve all users");
         Response response = RestAssured.given()
@@ -37,6 +38,7 @@ public class UserController {
         return users;
     }
 
+    @Step("Retrieve user by userId {userId}")
     public User getUserById(int userId) {
         logger.info("Retrieve user by userId {}", + userId);
         Response response = RestAssured.given()
@@ -53,7 +55,7 @@ public class UserController {
         return new Gson().fromJson(response.prettyPrint(), User.class);
     }
 
-    @Step("Create user")
+    @Step("Create user {user}")
     public User createUser(User user) {
         logger.info("Create user {}", user.getName());
         Response response = RestAssured
@@ -73,6 +75,8 @@ public class UserController {
         return response.jsonPath().getObject("", User.class);
     }
 
+
+    @Step("Delete user by userId {userId}")
     public void deleteUserById(int userId) {
         logger.info("Delete user {}", userId);
         Response response = RestAssured
