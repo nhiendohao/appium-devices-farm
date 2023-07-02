@@ -1,6 +1,7 @@
 package automation.example.demo.features.user.api;
 
 import static automation.example.demo.config.BaseConfig.getBaseConfig;
+import static automation.example.demo.pageobject.PageObject.waitForABit;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -63,19 +64,31 @@ public class UserController {
     @Step("Create user {user}")
     public User createUser(User user) {
         logger.info("Create user {}", user.getName());
-        Response response = RestAssured
-                .given()
-                .baseUri(this.baseApiUrl)
-                .header(
-                        "Authorization",
-                        "Bearer " + this.apiToken)
-                .contentType("application/json")
-                .body(new Gson().toJson(user))
-                .log().all()
-                .when()
-                .post("/public/v2/users");
+        int retries = 10;
+        boolean success = false;
+        Response response = null;
 
-        if (response.statusCode() != 201) {
+        while (retries > 1 && !success) {
+            response = RestAssured
+                    .given()
+                    .baseUri(this.baseApiUrl)
+                    .header(
+                            "Authorization",
+                            "Bearer " + this.apiToken)
+                    .contentType("application/json")
+                    .body(new Gson().toJson(user))
+                    .log().all()
+                    .when()
+                    .post("/public/v2/users");
+
+            if (response.statusCode() == 201) {
+                success = true;
+            }
+            waitForABit(1);
+            retries--;
+        }
+
+        if (!success) {
             throw new Error("Failed to create user " + user.getName());
         }
         return response.jsonPath().getObject("", User.class);
