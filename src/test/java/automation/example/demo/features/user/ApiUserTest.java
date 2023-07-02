@@ -41,13 +41,14 @@ public class ApiUserTest {
         user = DataLoaderHelpers.loadTestData("user.json", User.class);
     }
 
-    @Severity(SeverityLevel.NORMAL)
+    // Use displayName in order to handle uploading test result
     @Test
+    @DisplayName("TestCaseId: C53986860 create user")
+    @Severity(SeverityLevel.NORMAL)
     @Story("Create user")
     @Issue("TC10022")
     @TmsLink("TC10022")
     @Link(name = "GoogleLink", url = "https://www.googgle.com")
-    @DisplayName("TestCaseId: C53986860 create user")
     @Description("Verify user is created successfully")
     public void verifyUserIsCreatedSuccessfully() {
         String randomNumber = StringHelpers.generateRandomNumber(10);

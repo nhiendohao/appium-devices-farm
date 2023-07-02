@@ -47,14 +47,14 @@ public class ApiUserParameterizeTest {
         userController = new UserController();
     }
 
+    // Add displayName into ParameterizeTest in order to handle upload result
+    @ParameterizedTest(name = "TestCaseId: C53986860, C53986861 create user{0}")
     @Severity(SeverityLevel.NORMAL)
     @Story("Create user")
     @Issue("TC10022")
     @TmsLink("TC10022")
     @Link(name = "GoogleLink", url = "https://www.googgle.com")
-    @DisplayName("TC10022: create user")
     @Description("Verify user is created successfully")
-    @ParameterizedTest
     @MethodSource("dataProvider")
     public void verifyUserIsCreatedSuccessfully(User user) {
         String randomNumber = StringHelpers.generateRandomNumber(10);

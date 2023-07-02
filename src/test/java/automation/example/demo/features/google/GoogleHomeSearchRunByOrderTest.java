@@ -25,9 +25,11 @@ import io.qameta.allure.TmsLink;
         @Tag("GoogleSearch"),
 })
 @Feature("GoogleSearch")
-public class GoogleHomeSearchTest extends BaseWebTest {
+@TestMethodOrder(OrderAnnotation.class)
+public class GoogleHomeSearchRunByOrderTest extends BaseWebTest {
     GoogleHomePage googleHomePage;
 
+    @Order(3)
     @Severity(SeverityLevel.NORMAL)
     @Link(name = "Google Link", url = "https://www.googgle.com")
     @TmsLink("TC10011")
@@ -42,6 +44,7 @@ public class GoogleHomeSearchTest extends BaseWebTest {
         googleHomePage.searchFor("I like a " + animal);
     }
 
+    @Order(2)
     @Severity(SeverityLevel.NORMAL)
     @TmsLink("TC10012")
     @Link(name = "Google Link", url = "https://www.googgle.com")
@@ -55,6 +58,7 @@ public class GoogleHomeSearchTest extends BaseWebTest {
         googleHomePage.searchFor("I like a apple");
     }
 
+    @Order(1)
     @Severity(SeverityLevel.NORMAL)
     @TmsLink("TC10013")
     @Link(name = "Google Link", url = "https://www.googgle.com")
