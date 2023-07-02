@@ -24,7 +24,7 @@ import io.qameta.allure.TmsLink;
         @Tag("Regression"),
         @Tag("GoogleSearch"),
 })
-@Feature("GoogleSearchOrder")
+@Feature("GoogleSearch")
 @TestMethodOrder(OrderAnnotation.class)
 public class GoogleHomeSearchRunByOrderTest extends BaseWebTest {
     GoogleHomePage googleHomePage;
