@@ -23,9 +23,9 @@ public class ChannelController {
         RestAssured.given()
                    .baseUri(this.baseApiUrl)
                    .contentType("application/json")
-                   .when()
-                   .log().all()
                    .body(new Gson().toJson(channel))
+                   .log().all()
+                   .when()
                    .post("/api/channel/");
     }
 
@@ -34,8 +34,8 @@ public class ChannelController {
         RestAssured.given()
                    .baseUri(this.baseApiUrl)
                    .pathParams("channelId", channelId, "channelName", channelName, "pageNum", 0, "pageSize", 10)
-                   .when()
                    .log().all()
+                   .when()
                    .get("/api/channel/search?channelId="
                         + "{channelId}&channelName={channelName}&pageNum={pageNum}&pageSize={pageSize}");
     }
@@ -45,8 +45,8 @@ public class ChannelController {
         RestAssured.given()
                    .baseUri(this.baseApiUrl)
                    .pathParam("channelId", channelId)
-                   .when()
                    .log().all()
+                   .when()
                    .delete("/api/channel/{channelId}");
     }
 

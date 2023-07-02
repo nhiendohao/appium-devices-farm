@@ -25,29 +25,34 @@ public class UserController {
     @Step("Retrieve all users")
     public List<User> getUsers() {
         logger.info("Retrieve all users");
-        Response response = RestAssured.given()
-                                       .baseUri(this.baseApiUrl)
-                                       .when().log().all()
-                                       .get("/public/v2/users");
+        Response response = RestAssured
+                .given()
+                .baseUri(this.baseApiUrl)
+                .log().all()
+                .when()
+                .get("/public/v2/users");
+
         if (response.statusCode() != 200) {
             throw new Error("Failed to retrieve all users");
         }
 
-        Type userListType = new TypeToken<ArrayList<User>>(){}.getType();
+        Type userListType = new TypeToken<ArrayList<User>>() {}.getType();
         List<User> users = new Gson().fromJson(response.prettyPrint(), userListType);
         return users;
     }
 
     @Step("Retrieve user by userId {userId}")
     public User getUserById(int userId) {
-        logger.info("Retrieve user by userId {}", + userId);
-        Response response = RestAssured.given()
-                                       .baseUri(this.baseApiUrl)
-                                       .header(
-                                               "Authorization",
-                                               "Bearer " + this.apiToken)
-                                       .when().log().all()
-                                       .get(String.format("/public/v2/users/%s", userId));
+        logger.info("Retrieve user by userId {}", +userId);
+        Response response = RestAssured
+                .given()
+                .baseUri(this.baseApiUrl)
+                .header(
+                        "Authorization",
+                        "Bearer " + this.apiToken)
+                .log().all()
+                .when()
+                .get(String.format("/public/v2/users/%s", userId));
 
         if (response.statusCode() != 200) {
             throw new Error("Failed to retrieve user " + userId);
@@ -65,8 +70,9 @@ public class UserController {
                         "Authorization",
                         "Bearer " + this.apiToken)
                 .contentType("application/json")
-                .when().log().all()
                 .body(new Gson().toJson(user))
+                .log().all()
+                .when()
                 .post("/public/v2/users");
 
         if (response.statusCode() != 201) {
@@ -84,7 +90,8 @@ public class UserController {
                 .header(
                         "Authorization",
                         "Bearer " + this.apiToken)
-                .when().log().all()
+                .log().all()
+                .when()
                 .delete(String.format("/public/v2/users/%s", userId));
 
         if (response.statusCode() != 204) {
