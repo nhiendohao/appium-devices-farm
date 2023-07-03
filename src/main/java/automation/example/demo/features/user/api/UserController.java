@@ -64,8 +64,6 @@ public class UserController {
     @Step("Create user {user}")
     public User createUser(User user) {
         logger.info("Create user {}", user.getName());
-        int retries = 10;
-        boolean success = false;
         Response response = RestAssured
                 .given()
                 .baseUri(this.baseApiUrl)
@@ -78,6 +76,8 @@ public class UserController {
                 .when()
                 .post("/public/v2/users");
 
+        int retries = 10;
+        boolean success = false;
         while (retries > 1 && !success) {
             if (response.statusCode() == 201) {
                 success = true;
