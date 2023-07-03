@@ -66,21 +66,19 @@ public class UserController {
         logger.info("Create user {}", user.getName());
         int retries = 10;
         boolean success = false;
-        Response response = null;
+        Response response = RestAssured
+                .given()
+                .baseUri(this.baseApiUrl)
+                .header(
+                        "Authorization",
+                        "Bearer " + this.apiToken)
+                .contentType("application/json")
+                .body(new Gson().toJson(user))
+                .log().all()
+                .when()
+                .post("/public/v2/users");
 
         while (retries > 1 && !success) {
-            response = RestAssured
-                    .given()
-                    .baseUri(this.baseApiUrl)
-                    .header(
-                            "Authorization",
-                            "Bearer " + this.apiToken)
-                    .contentType("application/json")
-                    .body(new Gson().toJson(user))
-                    .log().all()
-                    .when()
-                    .post("/public/v2/users");
-
             if (response.statusCode() == 201) {
                 success = true;
             }
