@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 
 import automation.example.demo.models.User;
 import io.qameta.allure.Step;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
@@ -27,7 +28,7 @@ public class UserController {
     public List<User> getUsers() {
         logger.info("Retrieve all users");
         Response response = RestAssured
-                .given()
+                .given().filter(new AllureRestAssured())
                 .baseUri(this.baseApiUrl)
                 .log().all()
                 .when()
@@ -46,7 +47,7 @@ public class UserController {
     public User getUserById(int userId) {
         logger.info("Retrieve user by userId {}", +userId);
         Response response = RestAssured
-                .given()
+                .given().filter(new AllureRestAssured())
                 .baseUri(this.baseApiUrl)
                 .header(
                         "Authorization",
@@ -65,7 +66,7 @@ public class UserController {
     public User createUser(User user) {
         logger.info("Create user {}", user.getName());
         Response response = RestAssured
-                .given()
+                .given().filter(new AllureRestAssured())
                 .baseUri(this.baseApiUrl)
                 .header(
                         "Authorization",
@@ -96,7 +97,7 @@ public class UserController {
     public void deleteUserById(int userId) {
         logger.info("Delete user {}", userId);
         Response response = RestAssured
-                .given()
+                .given().filter(new AllureRestAssured())
                 .baseUri(this.baseApiUrl)
                 .header(
                         "Authorization",
