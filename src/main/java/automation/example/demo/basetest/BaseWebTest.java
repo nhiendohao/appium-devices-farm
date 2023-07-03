@@ -18,9 +18,7 @@ public class BaseWebTest {
     @AfterEach
     public void afterTest() {
         AllureReportHelpers.attachScreenshot(driver);
-        if (driver != null) {
-            driver.quit();
-        }
+        DriverManager.quitWebDriver();
     }
 
 }
