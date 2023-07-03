@@ -13,6 +13,8 @@ import org.junit.platform.launcher.TestExecutionListener;
 import org.junit.platform.launcher.TestIdentifier;
 import org.junit.platform.launcher.TestPlan;
 
+import automation.example.demo.drivermanager.DriverManager;
+import helpers.AllureReportHelpers;
 import integrations.testrail.BaseTestrail;
 import integrations.testrail.TestStatus;
 import integrations.testrail.TestrailConfig;
@@ -46,11 +48,13 @@ public class MyTestListener implements TestExecutionListener {
     @Override
     public void executionFinished(TestIdentifier testIdentifier, TestExecutionResult testExecutionResult) {
         TestExecutionListener.super.executionFinished(testIdentifier, testExecutionResult);
-        System.out.println(testIdentifier.getDisplayName());
 
-        // Update test results if isRun=true
-        if (TestrailConfig.isRun) {
-            if (testIdentifier.isTest()) {
+        if (testIdentifier.isTest()) {
+            // Attach screenshot to allure report
+//            AllureReportHelpers.attachScreenshot(DriverManager.getCurrentMobileDriver());
+
+            // Update test results if isRun=true
+            if (TestrailConfig.isRun) {
                 String runId = TestrailConfig.runId;
 
                 // Get caseId use

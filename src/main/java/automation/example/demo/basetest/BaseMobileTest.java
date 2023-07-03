@@ -7,6 +7,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 
+import automation.example.demo.drivermanager.DriverManager;
 import helpers.AllureReportHelpers;
 import io.appium.java_client.AppiumDriver;
 
@@ -30,8 +31,6 @@ public class BaseMobileTest {
     @AfterEach
     public void afterTest() {
         AllureReportHelpers.attachScreenshot(appiumDriver);
-        if (appiumDriver != null) {
-            appiumDriver.quit();
-        }
+        DriverManager.quitMobileDriver();
     }
 }
