@@ -48,9 +48,9 @@ public class DriverManager {
     public static Platform getMobilePlatform(WebDriver driver) {
         try {
             Platform platform = ((RemoteWebDriver) driver).getCapabilities().getPlatformName();
-            if (Platform.ANDROID.equals(platform)) {
+            if (platform.equals(Platform.ANDROID)) {
                 return Platform.ANDROID;
-            } else if (Platform.IOS.equals(platform)){
+            } else if (platform.equals(Platform.IOS)) {
                 return Platform.IOS;
             } else {
                 return Platform.MAC;

@@ -12,6 +12,7 @@ import com.google.gson.JsonObject;
 
 import automation.example.demo.models.Channel;
 import io.qameta.allure.Step;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
@@ -20,7 +21,7 @@ public class ChannelController {
 
     @Step("Create Channel by API")
     public void createChannelByAPI(Channel channel) {
-        RestAssured.given()
+        RestAssured.given().filter(new AllureRestAssured())
                    .baseUri(this.baseApiUrl)
                    .contentType("application/json")
                    .body(new Gson().toJson(channel))
@@ -31,7 +32,7 @@ public class ChannelController {
 
     @Step("Get Channel by API")
     public void getChannelByAPI(String channelId, String channelName) {
-        RestAssured.given()
+        RestAssured.given().filter(new AllureRestAssured())
                    .baseUri(this.baseApiUrl)
                    .pathParams("channelId", channelId, "channelName", channelName, "pageNum", 0, "pageSize", 10)
                    .log().all()
@@ -42,7 +43,7 @@ public class ChannelController {
 
     @Step("Delete Channel by API")
     public void deleteChannelByAPI(String channelId) {
-        RestAssured.given()
+        RestAssured.given().filter(new AllureRestAssured())
                    .baseUri(this.baseApiUrl)
                    .pathParam("channelId", channelId)
                    .log().all()

@@ -23,10 +23,11 @@ public class YoutubeHomePage extends MobileObject {
 
     public By suggestionList(int index) {
         Platform platform = DriverManager.getMobilePlatform(driver);
-        if (Platform.ANDROID.equals(platform)) {
+        if (platform.equals(Platform.ANDROID)) {
             return AppiumBy.xpath(String.format("(//android.widget.TextView)[%s]", index));
+        } else {
+            return AppiumBy.xpath(String.format("ios[%s]", index));
         }
-        return AppiumBy.xpath(String.format("ios[%s]", index));
     }
 
     public YoutubeHomePage(WebDriver driver) {
