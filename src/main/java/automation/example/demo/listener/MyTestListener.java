@@ -50,8 +50,10 @@ public class MyTestListener implements TestExecutionListener {
         TestExecutionListener.super.executionFinished(testIdentifier, testExecutionResult);
 
         if (testIdentifier.isTest()) {
-            // Attach screenshot to allure report
-//            AllureReportHelpers.attachScreenshot(DriverManager.getCurrentMobileDriver());
+            // Attach screenshot to allure report when test failed
+//            if (!testExecutionResult.getStatus().equals(Status.SUCCESSFUL)) {
+//                AllureReportHelpers.attachScreenshot(DriverManager.getCurrentWebDriver());
+//            }
 
             // Update test results if isRun=true
             if (TestrailConfig.isRun) {
@@ -84,6 +86,9 @@ public class MyTestListener implements TestExecutionListener {
                 Map testResult = baseTestrail.getTestResult(testStatus);
                 baseTestrail.addResultForCase(runId, testcaseId, testResult);
             }
+
+            // Close driver after finishing test
+//            DriverManager.quitWebDriver();
         }
     }
 
