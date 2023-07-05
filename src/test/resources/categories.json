@@ -1,19 +1,23 @@
 [
   {
-    "name": "Response status code mismatch",
-    "matchedStatuses": ["failed"],
-    "messageRegex": ".*The status code.*"
+    "name": "Passed",
+    "matchedStatuses": [ "passed" ],
+    "messageRegex": ".*"
   },
   {
-    "name": "All Failed Tests",
-    "matchedStatuses": ["failed"]
+    "name": "Product defects",
+    "matchedStatuses": [ "failed" ]
   },
   {
-    "name": "Broken tests",
-    "matchedStatuses": ["broken"]
+    "name": "Ignored tests",
+    "matchedStatuses": [ "skipped" ]
+  },
+  {
+    "name": "Test defects",
+    "matchedStatuses": [ "broken" ]
   },
   {
     "name": "Known issues",
-    "matchedStatuses": ["unknown"]
+    "matchedStatuses": [ "unknown" ]
   }
 ]
