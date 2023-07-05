@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 
 import automation.example.demo.drivermanager.DriverManager;
-import helpers.AllureReportHelpers;
 
 public class BaseWebTest {
     protected WebDriver driver;
@@ -17,8 +16,6 @@ public class BaseWebTest {
 
     @AfterEach
     public void afterTest() {
-        AllureReportHelpers.attachScreenshot(driver);
-        DriverManager.quitWebDriver();
     }
 
 }

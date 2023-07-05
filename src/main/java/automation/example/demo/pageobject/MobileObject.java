@@ -92,7 +92,7 @@ public class MobileObject extends PageObject{
             case RIGHT:
                 startPointX = (int) (width * edgeBorder);
                 startPointY = height / 2;
-                endPointX = (int) (width * edgeBorder);
+                endPointX = (int) (width * 0.90);
 
                 startPoint = new Point(startPointX, startPointY);
                 endPoint = new Point(endPointX, startPoint.y);
