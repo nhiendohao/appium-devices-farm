@@ -34,7 +34,7 @@ jobs:
       # Generate Allure report
       - run:
           name: Generate Allure report
-          command: allure generate target/allure-results --clean --output allure-report
+          command: allure generate --clean
       - save_cache:
           paths:
             - ~/.m2
