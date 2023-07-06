@@ -16,12 +16,12 @@ jobs:
       # Customize the JVM maximum heap limit
       MAVEN_OPTS: -Xmx3200m
     steps:
+      # Checkout the code
+      - checkout
       # Install web browsers
       - browser-tools/install-browser-tools
       # Install Allure report
       - allure/install
-      # Checkout the code
-      - checkout
       # Restore cache to speed up build
       - restore_cache:
           keys:
