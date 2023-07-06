@@ -1,0 +1,55 @@
+name: Maven Build
+on:
+  push:
+    branches: [ develop ]
+  pull_request:
+    branches: [ develop ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout code
+      - uses: actions/checkout@v2
+      # Install JDK 11
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          distribution: 'adopt'
+          java-version: '11'
+
+      # Install Unzip for Allure Installation
+      - name: Instal unzip
+        run: sudo apt install unzip
+
+      # Download and Install Allure 2.13.1.
+      - name: Allure archive download
+        run: curl -L https://github.com/allure-framework/allure2/releases/download/2.13.1/allure-commandline-2.13.1.zip -o /tmp/allure.zip
+      - name: Unzip archive
+        run: unzip /tmp/allure.zip
+      - name: Install allure
+        run: sudo mv allure-2.13.1 /usr/local/share/allure
+      - name: Allure binary symlinking
+        run: sudo ln -s /usr/local/share/allure/bin/allure /usr/local/bin/allure
+      # Log Allure version
+      - name: Check allure java-version
+        run: allure --version
+
+      # Restore cache to speed up build
+      - name: Cache the Maven packages to speed up build
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+
+      # Run maven test
+      - name: Start E2E Chrome testing
+        run: mvn clean verify -Dgroups="GoogleSearch"
+      # Store allure report
+      - name: Store Allure report
+        uses: actions/upload-artifact@v3
+        with:
+          name: test report
+          path: target/allure-report
