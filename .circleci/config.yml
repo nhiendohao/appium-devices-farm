@@ -3,7 +3,6 @@
 version: 2.1
 orbs:
   browser-tools: circleci/browser-tools@1.2.5
-#  allure: ayte/allure@0.1.3
 jobs:
   ui-chrome-test:
     # These next lines define a Docker executor: https://circleci.com/docs/2.0/executor-types/
@@ -20,8 +19,6 @@ jobs:
       - checkout
       # Install web browsers
       - browser-tools/install-browser-tools
-      # Install Allure report
-      #- allure/install
       # Install Unzip for Allure Installation
       - run:
           name: Install unzip
