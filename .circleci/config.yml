@@ -3,7 +3,7 @@
 version: 2.1
 orbs:
   browser-tools: circleci/browser-tools@1.2.5
-  allure: ayte/allure@0.1.3
+#  allure: ayte/allure@0.1.3
 jobs:
   ui-chrome-test:
     # These next lines define a Docker executor: https://circleci.com/docs/2.0/executor-types/
@@ -21,7 +21,28 @@ jobs:
       # Install web browsers
       - browser-tools/install-browser-tools
       # Install Allure report
-      - allure/install
+      #- allure/install
+      # Install Unzip for Allure Installation
+      - run:
+          name: Install unzip
+          command: sudo apt install unzip
+      # Download and Install allure-2.23.0.
+      - run:
+          name: Allure archive download
+          command: |
+            curl -L https://github.com/allure-framework/allure2/releases/download/2.23.0/allure-2.23.0.zip -o /tmp/allure.zip
+      - run:
+          name: Unzip archive
+          command: unzip /tmp/allure.zip
+      - run:
+          name: Install allure
+          command: sudo mv allure-2.23.0 /usr/local/share/allure
+      - run:
+          name: Allure binary symlinking
+          command: sudo ln -s /usr/local/share/allure/bin/allure /usr/local/bin/allure
+      - run:
+          name: Check allure java-version
+          command: allure --version
       # Restore cache to speed up build
       - restore_cache:
           keys:
@@ -34,7 +55,7 @@ jobs:
       # Generate Allure report
       - run:
           name: Generate Allure report
-          command: allure generate --clean
+          command: allure generate target/allure-results --clean --output allure-report
       - save_cache:
           paths:
             - ~/.m2

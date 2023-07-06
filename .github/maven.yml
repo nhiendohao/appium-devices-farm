@@ -20,7 +20,7 @@ jobs:
           java-version: '11'
 
       # Install Unzip for Allure Installation
-      - name: Instal unzip
+      - name: Install unzip
         run: sudo apt install unzip
 
       # Download and Install Allure 2.13.1.
