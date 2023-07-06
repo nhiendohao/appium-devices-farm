@@ -17,12 +17,15 @@ jobs:
     steps:
       # Checkout the code
       - checkout
+
       # Install web browsers
       - browser-tools/install-browser-tools
+
       # Install Unzip for Allure Installation
       - run:
           name: Install unzip
           command: sudo apt install unzip
+
       # Download and Install allure-2.23.0.
       - run:
           name: Allure archive download
@@ -37,18 +40,23 @@ jobs:
       - run:
           name: Allure binary symlinking
           command: sudo ln -s /usr/local/share/allure/bin/allure /usr/local/bin/allure
+
+      # Log Allure version
       - run:
           name: Check allure java-version
           command: allure --version
+
       # Restore cache to speed up build
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "pom.xml" }} # appends cache key with a hash of pom.xml file
             - v1-dependencies- # fallback in case previous cache key is not found
+
       # Run maven test
       - run:
           name: Start E2E Chrome testing
           command: mvn clean verify -Dgroups="GoogleSearch"
+
       # Generate Allure report
       - run:
           name: Generate Allure report
@@ -57,6 +65,7 @@ jobs:
           paths:
             - ~/.m2
           key: v1-dependencies-{{ checksum "pom.xml" }}
+
       # Store Allure report
       - store_artifacts:
           name: Uploading Allure report

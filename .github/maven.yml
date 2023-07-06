@@ -23,13 +23,13 @@ jobs:
       - name: Install unzip
         run: sudo apt install unzip
 
-      # Download and Install Allure 2.13.1.
+      # Download and Install Allure 2.23.0
       - name: Allure archive download
-        run: curl -L https://github.com/allure-framework/allure2/releases/download/2.13.1/allure-commandline-2.13.1.zip -o /tmp/allure.zip
+        run: curl -L https://github.com/allure-framework/allure2/releases/download/2.23.0/allure-2.23.0.zip -o /tmp/allure.zip
       - name: Unzip archive
         run: unzip /tmp/allure.zip
       - name: Install allure
-        run: sudo mv allure-2.13.1 /usr/local/share/allure
+        run: sudo mv allure-2.23.0 /usr/local/share/allure
       - name: Allure binary symlinking
         run: sudo ln -s /usr/local/share/allure/bin/allure /usr/local/bin/allure
       # Log Allure version
