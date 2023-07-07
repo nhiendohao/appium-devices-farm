@@ -1,13 +1,13 @@
 pipeline {
     agent {
         docker {
-            image 'cimg/openjdk:11.0'
+            image 'openjdk:11.0'
         }
     }
 
-//     environment {
-//         GIT_CREDENTIALS = credentials('GIT_CREDENTIALS_ID')
-//     }
+     environment {
+         GIT_CREDENTIALS = credentials('GIT_CREDENTIALS_ID')
+     }
 
     stages {
         stage('Test java version') {
@@ -19,6 +19,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
+                    sh 'echo "Git credential is $GIT_CREDENTIALS"'
                     // The below will clone your repo and will be checked out to master branch by default.
                     git credentialsId: 'jenkins-user-github', url: 'https://github.com/cuongnguyen4285/selenium-junit5-allure-template.git'
                     // Do a ls -lart to view all the files are cloned. It will be cloned. This is just for you to be sure about it.
@@ -34,7 +35,7 @@ pipeline {
         stage('Run Maven test') {
             steps {
                 // Run your Selenium tests
-                sh 'mvn clean verify -Dgroups=GoogleSearch'
+                sh 'mvn clean verify -Dgroups="GoogleSearch"'
             }
         }
 
