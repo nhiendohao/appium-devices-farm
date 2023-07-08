@@ -5,9 +5,9 @@ pipeline {
         }
     }
 
-     environment {
-         GIT_CREDENTIALS = credentials('GIT_CREDENTIALS_ID')
-     }
+//     environment {
+//         GIT_CREDENTIALS = credentials('GIT_CREDENTIALS_ID')
+//     }
 
     stages {
         stage('Test java version') {
@@ -16,21 +16,21 @@ pipeline {
             }
         }
 
-        stage('Checkout') {
-            steps {
-                script {
-                    sh 'echo "Git credential is $GIT_CREDENTIALS"'
-                    // The below will clone your repo and will be checked out to master branch by default.
-                    git credentialsId: 'jenkins-user-github', url: 'https://github.com/cuongnguyen4285/selenium-junit5-allure-template.git'
-                    // Do a ls -lart to view all the files are cloned. It will be cloned. This is just for you to be sure about it.
-                    sh "ls -lart ./*"
-                    // List all branches in your repo.
-                    sh "git branch -a"
-                    // Checkout to a specific branch in your repo.
-                    sh "git checkout main"
-                }
-            }
-        }
+//        stage('Checkout') {
+//            steps {
+//                script {
+//                    sh 'echo "Git credential is $GIT_CREDENTIALS"'
+//                    // The below will clone your repo and will be checked out to master branch by default.
+//                    git credentialsId: '15210e7b-db0e-4450-a141-138192ad79ab', url: 'https://github.com/cuongnguyen4285/selenium-junit5-allure-template.git'
+//                    // Do a ls -lart to view all the files are cloned. It will be cloned. This is just for you to be sure about it.
+//                    sh "ls -lart ./*"
+//                    // List all branches in your repo.
+//                    sh "git branch -a"
+//                    // Checkout to a specific branch in your repo.
+//                    sh "git checkout main"
+//                }
+//            }
+//        }
 
         stage('Run Maven test') {
             steps {
