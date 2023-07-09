@@ -14,6 +14,19 @@ jobs:
     environment:
       # Customize the JVM maximum heap limit
       MAVEN_OPTS: -Xmx3200m
+    parameters:
+      slack_notification:
+        type: boolean
+        default: true
+      job_title:
+        type: string
+        default: "Regression_Test"
+      project_tags:
+        type: string
+        default: "Regression"
+      test_environment:
+        type: string
+        default: "beta"
     steps:
       # Checkout the code
       - checkout
@@ -55,7 +68,7 @@ jobs:
       # Run maven test
       - run:
           name: Start E2E Chrome testing
-          command: mvn clean verify -Dgroups="GoogleSearch"
+          command: mvn clean verify -Dtest.environment=<< parameters.test_environment >> -Dgroups=<< parameters.project_tags >>
 
       # Generate Allure report
       - run:
@@ -78,6 +91,10 @@ workflows:
     # Inside the workflow, you define the jobs you want to run.
     jobs:
       - ui-chrome-test:
+          name: E2E testing regression
+          job_title: Dev_E2E_Regression
+          project_tags: "GoogleSearch"
+          test_environment: "beta"
           filters:
             branches:
               only:
