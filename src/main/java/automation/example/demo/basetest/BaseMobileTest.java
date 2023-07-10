@@ -22,7 +22,7 @@ public class BaseMobileTest {
         /**
          * Add a delay 3 seconds before stopping Appium server
          */
-        Thread.sleep(3000);
+        Thread.sleep(5000);
         stopAppiumServer();
     }
 
