@@ -12,14 +12,10 @@ import org.junit.platform.engine.reporting.ReportEntry;
 import org.junit.platform.launcher.TestExecutionListener;
 import org.junit.platform.launcher.TestIdentifier;
 import org.junit.platform.launcher.TestPlan;
-import org.openqa.selenium.WebDriver;
 
-import automation.example.demo.drivermanager.DriverManager;
-import helpers.AllureReportHelpers;
 import integrations.testrail.BaseTestrail;
 import integrations.testrail.TestStatus;
 import integrations.testrail.TestrailConfig;
-import io.appium.java_client.AppiumDriver;
 
 public class MyTestListener implements TestExecutionListener {
     @Override
@@ -53,20 +49,6 @@ public class MyTestListener implements TestExecutionListener {
 
         if (testIdentifier.isTest()) {
             /**
-             * Attach screenshot to allure report when test failed
-             */
-            WebDriver driver = DriverManager.getCurrentWebDriver();
-            AppiumDriver mobileDriver = DriverManager.getCurrentMobileDriver();
-            if (!testExecutionResult.getStatus().equals(Status.SUCCESSFUL)) {
-                if (driver != null) {
-                    AllureReportHelpers.attachScreenshot(driver);
-                }
-                if (mobileDriver != null) {
-                    AllureReportHelpers.attachScreenshot(mobileDriver);
-                }
-            }
-
-            /**
              * Update test results if isRun=true
              */
             if (TestrailConfig.isRun) {
@@ -98,16 +80,6 @@ public class MyTestListener implements TestExecutionListener {
                                         ? TestStatus.SUCCESS : TestStatus.FAILURE;
                 Map testResult = baseTestrail.getTestResult(testStatus);
                 baseTestrail.addResultForCase(runId, testcaseId, testResult);
-            }
-
-            /**
-             * Close all drivers after finishing test
-             */
-            if (driver != null) {
-                DriverManager.quitWebDriver();
-            }
-            if (mobileDriver != null) {
-                DriverManager.quitMobileDriver();
             }
         }
     }

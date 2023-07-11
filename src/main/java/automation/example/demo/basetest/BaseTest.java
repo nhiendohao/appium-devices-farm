@@ -4,13 +4,9 @@ import static automation.example.demo.drivermanager.appiumdriver.AppiumManager.s
 import static automation.example.demo.drivermanager.appiumdriver.AppiumManager.stopAppiumServer;
 
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 
-import io.appium.java_client.AppiumDriver;
-
-public class BaseMobileTest {
-    protected AppiumDriver appiumDriver;
+public class BaseTest {
 
     @BeforeAll
     public static void setup() {
@@ -20,9 +16,5 @@ public class BaseMobileTest {
     @AfterAll
     public static void tearDown() {
         stopAppiumServer();
-    }
-
-    @AfterEach
-    public void afterTest() {
     }
 }

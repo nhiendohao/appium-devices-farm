@@ -42,7 +42,7 @@ public class WebDriverFactory {
                 WebDriverManager.chromedriver().setup();
                 final ChromeOptions chromeOptions = new ChromeOptions();
                 // To run on Git Action we need to add headless, nosandbox, and disable-dev-shm-usage
-                chromeOptions.addArguments("--headless");
+//                chromeOptions.addArguments("--headless");
 //                chromeOptions.addArguments("no-sandbox");
 //                chromeOptions.addArguments("disable-dev-shm-usage");
 //                chromeOptions.addArguments("--remote-debugging-port=9222");

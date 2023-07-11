@@ -1,12 +1,16 @@
 package automation.example.demo.features.google;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.WebDriver;
 
-import automation.example.demo.basetest.BaseWebTest;
+import automation.example.demo.drivermanager.DriverManager;
 import automation.example.demo.features.search.ui.pages.GooglePage;
+import helpers.AllureReportHelpers;
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Link;
@@ -20,8 +24,21 @@ import io.qameta.allure.TmsLink;
         @Tag("GoogleSearch"),
 })
 @Feature("GoogleSearch")
-public class GoogleSearchTest extends BaseWebTest {
+public class GoogleSearchTest {
+    private WebDriver driver;
     GooglePage googlePage;
+
+    @BeforeEach
+    public void beforeTest() {
+        driver = DriverManager.getWebDriver();
+        googlePage = new GooglePage(driver);
+    }
+
+    @AfterEach
+    public void afterTest() {
+        AllureReportHelpers.attachScreenshot(driver);
+        DriverManager.quitWebDriver();
+    }
 
     @Severity(SeverityLevel.NORMAL)
     @TmsLink("TC10014")
@@ -31,7 +48,6 @@ public class GoogleSearchTest extends BaseWebTest {
     @Description("Verify corresponding result displays when searching for animal")
     @Test
     public void verifyCorrespondingResultDisplaysWhenSearchingForAnimal() {
-        googlePage = new GooglePage(driver);
         googlePage.openApplication();
         googlePage.searchFor("I like a dog");
     }
@@ -45,7 +61,6 @@ public class GoogleSearchTest extends BaseWebTest {
     @Description("Verify corresponding result displays when searching for fruit")
     @Test
     public void verifyCorrespondingResultDisplaysWhenSearchingForFruit() {
-        googlePage = new GooglePage(driver);
         googlePage.openApplication();
         googlePage.searchFor("I like a banana");
     }
@@ -58,7 +73,6 @@ public class GoogleSearchTest extends BaseWebTest {
     @Description("Verify Google Logo")
     @Test
     public void verifyGoogleLogo() {
-        googlePage = new GooglePage(driver);
         googlePage.openApplication();
         googlePage.verifyGoogleLogo();
     }
