@@ -18,11 +18,7 @@ public class BaseMobileTest {
     }
 
     @AfterAll
-    public static void tearDown() throws InterruptedException {
-        /**
-         * Add a delay 3 seconds before stopping Appium server
-         */
-        Thread.sleep(5000);
+    public static void tearDown() {
         stopAppiumServer();
     }
 

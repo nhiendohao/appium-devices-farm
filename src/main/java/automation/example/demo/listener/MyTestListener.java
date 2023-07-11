@@ -103,8 +103,12 @@ public class MyTestListener implements TestExecutionListener {
             /**
              * Close all drivers after finishing test
              */
-            DriverManager.quitWebDriver();
-            DriverManager.quitMobileDriver();
+            if (driver != null) {
+                DriverManager.quitWebDriver();
+            }
+            if (mobileDriver != null) {
+                DriverManager.quitMobileDriver();
+            }
         }
     }
 
