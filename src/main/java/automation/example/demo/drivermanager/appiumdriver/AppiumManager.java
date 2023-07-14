@@ -1,6 +1,5 @@
 package automation.example.demo.drivermanager.appiumdriver;
 
-import static automation.example.demo.pageobject.PageObject.waitForABit;
 import static io.appium.java_client.service.local.flags.GeneralServerFlag.USE_PLUGINS;
 
 import org.openqa.selenium.Platform;
@@ -39,10 +38,6 @@ public class AppiumManager {
     }
 
     public static void stopAppiumServer() {
-        /**
-         * Add a delay 5 seconds before stopping Appium server
-         */
-        waitForABit(5);
         appiumLocal.stop();
         if (appiumLocal.isRunning()) {
             logger.info("Appium server didn't shutdown. Trying to quit again....");

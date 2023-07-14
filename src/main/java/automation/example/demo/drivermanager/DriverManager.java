@@ -1,5 +1,7 @@
 package automation.example.demo.drivermanager;
 
+import static automation.example.demo.pageobject.PageObject.waitForABit;
+
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.NoSuchDriverException;
@@ -42,6 +44,15 @@ public class DriverManager {
 
     public static void quitMobileDriver() {
         mobileDriver.get().quit();
+        int retries = 10;
+        boolean success = false;
+        while (retries < 11 && !success) {
+            if (mobileDriver.get().getSessionId() == null) {
+                success = true;
+            }
+            waitForABit(3);
+            retries--;
+        }
         mobileDriver.set(null);
     }
 
