@@ -1,14 +1,11 @@
 pipeline {
-    agent any
-//    agent {
-//        docker {
-//            image 'maven:3.3.3'
-//        }
-//    }
+//    agent any
 
-    tools {
-        maven 'MAVEN_3.6.3'
-        jdk 'JDK_1.8.0_251'
+    agent {
+        docker {
+            image 'maven:3.8.3-openjdk-11'
+            args '-v /var/run/docker.sock:/var/run/docker.sock'
+        }
     }
 
     stages {
