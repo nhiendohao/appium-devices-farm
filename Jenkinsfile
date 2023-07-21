@@ -17,8 +17,8 @@ pipeline {
         stage('Generate Allure report') {
             steps {
                 // Install Allure command-line tool
-                sh 'curl -o allure-2.23.0.zip -Ls https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.23.0/allure-commandline-2.23.0.zip'
-                sh 'unzip allure-2.23.0.zip'
+                sh 'curl -o /temp/allure-2.23.0.zip -Ls https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.23.0/allure-commandline-2.23.0.zip'
+                sh 'unzip -o /temp/allure-2.23.0.zip'
 
                 // Generate Allure report
                 sh './allure-2.23.0/bin/allure generate target/allure-results --clean --output allure-report'
