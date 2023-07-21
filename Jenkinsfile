@@ -1,9 +1,10 @@
 pipeline {
-    agent {
-        docker {
-            image 'adoptopenjdk/openjdk11'
-        }
-    }
+    agent any
+//    agent {
+//        docker {
+//            image 'adoptopenjdk/openjdk11'
+//        }
+//    }
 
     stages {
         stage('Run Maven test') {
