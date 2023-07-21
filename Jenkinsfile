@@ -1,15 +1,16 @@
 pipeline {
-    agent any
-//    agent {
-//        docker {
-//            image 'adoptopenjdk/openjdk11'
-//        }
-//    }
+//    agent any
+    agent {
+        docker {
+            image 'maven:3.3.3'
+        }
+    }
 
     stages {
         stage('Run Maven test') {
             steps {
                 // Run your Selenium tests
+                echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
                 sh 'mvn clean verify -Dgroups="GoogleSearch"'
             }
         }
