@@ -1,19 +1,23 @@
 pipeline {
-//    agent any
+    agent any
 
-    agent {
-        docker {
-            image 'maven:3.8.3-openjdk-11'
-            args '-v /var/run/docker.sock:/var/run/docker.sock'
-        }
+//    agent {
+//        docker {
+//            image 'maven:3.8.3-openjdk-11'
+//            args '-v /var/run/docker.sock:/var/run/docker.sock'
+//        }
+//    }
+
+    environment {
+        RUN_TAGS = 'GoogleSearch'
     }
 
     stages {
         stage('Run Maven test') {
             steps {
                 // Run your Selenium tests
-                echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-                sh 'mvn clean verify -Dgroups="GoogleSearch"'
+                echo "Running ${BUILD_ID} on ${JENKINS_URL}"
+                sh "mvn clean verify -Dgroups=${RUN_TAGS}"
             }
         }
 
