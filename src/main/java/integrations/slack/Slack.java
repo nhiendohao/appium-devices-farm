@@ -8,7 +8,7 @@ import io.restassured.response.Response;
 
 public class Slack {
 
-    public static void main(String... args) {
+    public static void main(String[] args) {
         String host = args[0];
         String jobId = args[1];
         sendMessage(

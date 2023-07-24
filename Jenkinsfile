@@ -37,7 +37,7 @@ pipeline {
 
         stage('Send Slack report') {
             steps {
-                sh "mvn exec:java -Dexec.mainClass=integrations.slack.Slack -Dhost=${JENKINS_URL} -DjobId=${BUILD_ID}"
+                sh "mvn exec:java -Dexec.mainClass=integrations.slack.Slack -Dexec.args=\"${JENKINS_URL} ${BUILD_ID}\""
             }
         }
 
