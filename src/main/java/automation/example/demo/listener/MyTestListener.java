@@ -13,11 +13,17 @@ import org.junit.platform.launcher.TestExecutionListener;
 import org.junit.platform.launcher.TestIdentifier;
 import org.junit.platform.launcher.TestPlan;
 
+import helpers.FileHelpers;
+import integrations.slack.jsonreport.JsonReport;
 import integrations.testrail.BaseTestrail;
 import integrations.testrail.TestStatus;
 import integrations.testrail.TestrailConfig;
 
 public class MyTestListener implements TestExecutionListener {
+    private static int totalPasses = 0;
+    private static int totalFails = 0;
+    private static int totalSkips = 0;
+
     @Override
     public void testPlanExecutionStarted(TestPlan testPlan) {
         TestExecutionListener.super.testPlanExecutionStarted(testPlan);
@@ -26,6 +32,14 @@ public class MyTestListener implements TestExecutionListener {
     @Override
     public void testPlanExecutionFinished(TestPlan testPlan) {
         TestExecutionListener.super.testPlanExecutionFinished(testPlan);
+        int totalTestCases = totalPasses + totalFails + totalSkips;
+        JsonReport jsonReport = JsonReport.builder()
+                                          .totalTestCases(totalTestCases)
+                                          .totalPasses(totalPasses)
+                                          .totalFails(totalFails)
+                                          .totalSkips(totalSkips)
+                                          .build();
+        FileHelpers.writeObjectAsJsonFile(jsonReport, "target/jsonReport.json");
     }
 
     @Override
@@ -48,6 +62,20 @@ public class MyTestListener implements TestExecutionListener {
         TestExecutionListener.super.executionFinished(testIdentifier, testExecutionResult);
 
         if (testIdentifier.isTest()) {
+            /**
+             * Add results to JsonReport
+             */
+            switch (testExecutionResult.getStatus()) {
+                case SUCCESSFUL:
+                    totalPasses++;
+                    break;
+                case FAILED:
+                    totalFails++;
+                default:
+                    totalSkips++;
+                    break;
+            }
+
             /**
              * Update test results if isRun=true
              */

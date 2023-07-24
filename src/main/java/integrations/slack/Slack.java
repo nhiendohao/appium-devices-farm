@@ -1,20 +1,24 @@
 package integrations.slack;
 
+import static helpers.FileHelpers.readJsonFileIntoObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
+import integrations.slack.jsonreport.JsonReport;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
 public class Slack {
 
     public static void main(String[] args) {
+        JsonReport jsonReport = readJsonFileIntoObject(JsonReport.class, "target/jsonReport.json");
         String host = args[0];
         String jobId = args[1];
         sendMessage(
-                "Total test cases: 10"
-                + "\nPassed: 10"
-                + "\nFailed: 0"
+                "Total test cases: " + jsonReport.getTotalTestCases()
+                + "\nPassed: " + jsonReport.getTotalPasses()
+                + "\nFailed: " + + jsonReport.getTotalFails()
                 + "\nAllure report: " + host + "/job/Selenium_Pipeline_Allure_Report/" + jobId + "/allure/"
         );
     }
