@@ -9,8 +9,8 @@ pipeline {
         stage('Run Maven test') {
             steps {
                 // Run your Selenium tests
-                echo "Running test on ${env.BUILD_ID} and ${env.JENKINS_URL}"
-                sh "mvn clean verify -Dgroups=${env.RUN_TAGS}"
+                echo "Running test on ${BUILD_ID} and ${JENKINS_URL}"
+                sh "mvn clean verify -Dgroups=${RUN_TAGS}"
             }
         }
 
@@ -32,6 +32,12 @@ pipeline {
                     // Publish Allure report
                     allure([includeProperties: false, jdk: '', results: [[path: 'target/allure-results']]])
                 }
+            }
+        }
+
+        stage('Send Slack report') {
+            steps {
+                sh "mvn exec:java -Dexec.mainClass=integrations.slack.Slack -Dhost=${JENKINS_URL} -DjobId=${BUILD_ID}"
             }
         }
 
