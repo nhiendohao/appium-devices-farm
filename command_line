@@ -5,16 +5,11 @@ git rm --cached <file>
 To remove a folder and all files in the folder recursively:
 git rm -r --cached <folder> -f
 
-# Run a java class
-javac src/test/java/com/mypersonal/project/test/PrintHelloWorld.java
-javac **/test/PrintHelloWorld.java
-
-# Use Command Line Arguments in Java
+# Java Command Line with Arguments
 javac **/test/PrintHelloWorld.java variable1 variable2
 
-# Input classpath in Command Line
-javac -cp ".:/Users/lw11643/.m2/repository/io/rest-assured/rest-assured/5.3.0/rest-assured-5.3.0.jar" **/integrations/slack/Slack.java
-javac -cp ".:/Users/lw11643/.m2/repository/io/rest-assured/rest-assured/5.3.0/rest-assured-5.3.0.jar" "src/main/java/integrations/slack/SlackMessage.java" **/integrations/slack/Slack.java
+# Maven Command Line with Arguments
+mvn exec:java -Dexec.mainClass=integrations.slack.Slack -Dexec.args="arg1 arg2"
 
 ### Custom Listener
 Link: https://junit.org/junit5/docs/current/user-guide/#launcher-api-listeners-custom
