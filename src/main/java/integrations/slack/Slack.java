@@ -14,12 +14,13 @@ public class Slack {
     public static void main(String[] args) {
         JsonReport jsonReport = readJsonFileIntoObject(JsonReport.class, "target/jsonReport.json");
         String host = args[0];
-        String jobId = args[1];
+        String jobName = args[1];
+        String jobId = args[2];
         sendMessage(
                 "Total test cases: " + jsonReport.getTotalTestCases()
                 + "\nPassed: " + jsonReport.getTotalPasses()
                 + "\nFailed: " + + jsonReport.getTotalFails()
-                + "\nAllure report: " + host + "/job/Selenium_Pipeline_Allure_Report/" + jobId + "/allure/"
+                + "\nAllure report: " + host + "job/" + jobName + "/" + jobId + "/allure/"
         );
     }
 
