@@ -1,4 +1,5 @@
 /.idea
 target/
 allure-report/
+allure-results/
 log
