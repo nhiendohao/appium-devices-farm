@@ -25,7 +25,9 @@ public class WebDriverFactory {
         switch (browser.toLowerCase()) {
             case "firefox":
                 WebDriverManager.firefoxdriver().setup();
-                driver = new FirefoxDriver();
+                FirefoxOptions options = new FirefoxOptions();
+                options.addArguments("--headless");
+                driver = new FirefoxDriver(options);
                 break;
             case "edge":
                 WebDriverManager.edgedriver().setup();

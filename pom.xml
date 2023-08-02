@@ -42,7 +42,7 @@
 
     <test.environment>beta</test.environment>
     <appium.udid>QV780HN49H</appium.udid>
-    <webdriver.driver>chrome</webdriver.driver>
+    <webdriver.driver>firefox</webdriver.driver>
     <webdriver.remoteurl>http://localhost:4444/wd/hub</webdriver.remoteurl>
   </properties>
 
