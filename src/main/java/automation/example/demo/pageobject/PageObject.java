@@ -4,6 +4,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.function.Function;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -12,12 +13,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public abstract class PageObject {
     protected WebDriver driver;
 
-    public PageObject (WebDriver driver) {
+    public PageObject(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
@@ -62,7 +65,7 @@ public abstract class PageObject {
         return element.isDisplayed();
     }
 
-    public static void waitForABit(int seconds){
+    public static void waitForABit(int seconds) {
         try {
             Thread.sleep(seconds * 1000L);
         } catch (InterruptedException ex) {
@@ -82,7 +85,6 @@ public abstract class PageObject {
         WebElement element = driver.findElement(by);
         return element.getText();
     }
-
 
     public void waitUntilElementVisible(WebElement element, int timeOut) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeOut));
@@ -158,4 +160,37 @@ public abstract class PageObject {
         System.out.println("WindowName: " + tabs);
         driver.switchTo().window(windowName);
     }
+
+    /**
+     * Fluent wait
+     */
+    public void waitForAElementAndClick(By by) {
+        Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+                .withTimeout(Duration.ofSeconds(30))
+                .pollingEvery(Duration.ofSeconds(5))
+                .ignoring(NoSuchElementException.class);
+        WebElement element = wait.until(new Function<WebDriver, WebElement>() {
+            public WebElement apply(WebDriver driver) {
+                return driver.findElement(by);
+            }
+        });
+        element.click();
+    }
+
+    /**
+     * Fluent wait
+     */
+    public void waitForAElementAndEnter(By by, String value) {
+        Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+                .withTimeout(Duration.ofSeconds(30))
+                .pollingEvery(Duration.ofSeconds(5))
+                .ignoring(NoSuchElementException.class);
+        WebElement element = wait.until(new Function<WebDriver, WebElement>() {
+            public WebElement apply(WebDriver driver) {
+                return driver.findElement(by);
+            }
+        });
+        element.sendKeys(value);
+    }
+
 }
