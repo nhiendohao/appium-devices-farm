@@ -30,7 +30,7 @@ public class BaseTestrail {
         }
     }
 
-    public Map getTestResult(TestStatus testStatus) {
+    public Map<String, String> getTestResult(TestStatus testStatus) {
         String status_id = "";
         String status_message = "";
 
@@ -46,7 +46,7 @@ public class BaseTestrail {
                 break;
         }
 
-        Map data = new HashMap();
+        Map<String, String> data = new HashMap<>();
         data.put("status_id", status_id);
         data.put("comment", status_message);
         return data;

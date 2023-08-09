@@ -106,7 +106,7 @@ public class MyTestListener implements TestExecutionListener {
                 // Update test results to Testrail
                 TestStatus testStatus = testExecutionResult.getStatus().equals(Status.SUCCESSFUL)
                                         ? TestStatus.SUCCESS : TestStatus.FAILURE;
-                Map testResult = baseTestrail.getTestResult(testStatus);
+                Map<String, String> testResult = baseTestrail.getTestResult(testStatus);
                 baseTestrail.addResultForCase(runId, testcaseId, testResult);
             }
         }
