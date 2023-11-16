@@ -7,4 +7,6 @@ public class Constants {
 
     public static final String CHANNEL_LIST_FILE_PATH = "./testdata/json/channel_list.json";
 
+    public static final int TEST_WAIT_TIME = 90;
+
 }

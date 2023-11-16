@@ -13,12 +13,12 @@ import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import io.qameta.allure.Step;
 
 public class YoutubeHomePage extends MobileObject {
-    @AndroidFindBy(accessibility = "Search")
-    @iOSXCUITFindBy(accessibility = "Search")
+    @AndroidFindBy(xpath = "//android.widget.ImageView[@content-desc=\"Search\"]")
+    @iOSXCUITFindBy(accessibility = "id.ui.navigation.search.button")
     WebElement searchIcon;
 
     @AndroidFindBy(id = "com.google.android.youtube:id/search_edit_text")
-    @iOSXCUITFindBy(id = "Search")
+    @iOSXCUITFindBy(id = "id.navigation.search.text_field")
     WebElement searchBar;
 
     public By suggestionList(int index) {
@@ -27,6 +27,14 @@ public class YoutubeHomePage extends MobileObject {
             return AppiumBy.xpath(String.format("(//android.widget.TextView)[%s]", index));
         } else {
             return AppiumBy.xpath(String.format("ios[%s]", index));
+        }
+    }
+    public By suggestionList(String itemName) {
+        Platform platform = DriverManager.getMobilePlatform(driver);
+        if (platform.equals(Platform.ANDROID)) {
+            return AppiumBy.xpath(String.format("(//android.widget.TextView)[%s]", itemName));
+        } else {
+            return AppiumBy.xpath(String.format("//XCUIElementTypeStaticText[@name='%s, Search suggestion']", itemName));
         }
     }
 
@@ -44,6 +52,11 @@ public class YoutubeHomePage extends MobileObject {
     public void chooseAnItemFromSuggestionList(int index) {
         waitUntilElementVisible(suggestionList(index), 30);
         clickOn(suggestionList(index));
+    }
+
+    public void chooseAnItemFromSuggestionList(String itemName) {
+        waitUntilElementVisible(suggestionList(itemName), 30);
+        clickOn(suggestionList(itemName));
     }
 
 }
