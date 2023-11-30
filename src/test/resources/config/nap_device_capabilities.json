@@ -109,6 +109,48 @@
       "wdaLocalPort": "8100",
       "usePrebuiltWDA": true,
       "noReset": true
+    },
+    "99161FFBA001LB": {
+      "automationName": "UiAutomator2",
+      "platformName": "Android",
+      "udid": "99161FFBA001LB",
+      "deviceName": "Vivo V20",
+      "platformVersion": "13",
+      "appPackage": "com.google.android.youtube",
+      "appActivity": "com.google.android.apps.youtube.app.watchwhile.WatchWhileActivity",
+      "app": "path/to/your/apk",
+      "noReset": true,
+      "nativeWebScreenshot": true,
+      "systemPort": "8101",
+      "fullReset": false
+    },
+    "R58M24VYJ0N": {
+      "automationName": "UiAutomator2",
+      "platformName": "Android",
+      "udid": "R58M24VYJ0N",
+      "deviceName": "Vivo V20",
+      "platformVersion": "13",
+      "appPackage": "com.google.android.youtube",
+      "appActivity": "com.google.android.apps.youtube.app.watchwhile.WatchWhileActivity",
+      "app": "path/to/your/apk",
+      "noReset": true,
+      "nativeWebScreenshot": true,
+      "systemPort": "8101",
+      "fullReset": false
+    },
+    "R5CW13HJD3W": {
+      "automationName": "UiAutomator2",
+      "platformName": "Android",
+      "udid": "R5CW13HJD3W",
+      "deviceName": "Vivo V20",
+      "platformVersion": "13",
+      "appPackage": "com.google.android.youtube",
+      "appActivity": "com.google.android.apps.youtube.app.watchwhile.WatchWhileActivity",
+      "app": "path/to/your/apk",
+      "noReset": true,
+      "nativeWebScreenshot": true,
+      "systemPort": "8101",
+      "fullReset": false
     }
   }
 }

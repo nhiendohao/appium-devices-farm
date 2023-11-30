@@ -8,9 +8,9 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static automation.example.demo.drivermanager.appiumdriver.AppiumManager.isAppiumAvailable;
 import static helpers.FigletHelper.figlet;
@@ -23,33 +23,30 @@ public class Devices {
 
 
     public static synchronized List<Device> getConnectedDevices() {
-        if (deviceList == null) {
-            String remoteWDHubIP = AppiumManager.getRemoteWDHubIp();
-            String response = new ApiHelper().sendGetRequest("http://" + remoteWDHubIP + ":" +remoteWDHubPort + "/device-farm/api/devices");
-            try {
+        try {
+            if (deviceList == null) {
+                String response = new ApiHelper().sendGetRequest(String.format("http://%s:%s/device-farm/api/devices", remoteWDHubIP, remoteWDHubPort));
                 deviceList = Arrays.asList(new ObjectMapper().readValue(response, Device[].class));
-            } catch (JsonProcessingException e) {
-
-                e.printStackTrace();
             }
+
+            if (Objects.requireNonNull(deviceList).isEmpty()) {
+                figlet("No Devices Connected");
+                // You may choose to throw an exception or log a warning instead of exiting the system
+                throw new RuntimeException("No devices connected");
+            }
+
+        } catch (JsonProcessingException e) {
+            logger.error("Error while processing JSON response: {}", e.getMessage());
+            // Handle the exception or log an error message
         }
-        if (deviceList.size() == 0) {
-            figlet("No Devices Connected");
-            System.exit(0);
-        }
-        return deviceList;
+
+        return Collections.unmodifiableList(deviceList);
     }
 
     public static int countConnectedDevicesByPlatform(String platform) {
-        List<Device> connectedDevices = getConnectedDevices();
-        int count = 0;
-        if (connectedDevices.size() > 0) {
-            for (Device device : connectedDevices) {
-                if (device.platform.equalsIgnoreCase(platform))
-                    count = count + 1;
-            }
-        }
-        return count;
+        return (int) getConnectedDevices().stream()
+                .filter(device -> device.getPlatform().equalsIgnoreCase(platform))
+                .count();
     }
 
     public static void waitForAvailableDevice(String platform, int timeOut) {
@@ -61,7 +58,6 @@ public class Devices {
                 logger.info("Your device is available");
             } else {
                 while (currentSession == totalConnectedDevices && timeOut > 0) {
-                    logger.info("Waiting for available device in 4seconds");
                     Thread.sleep(4000);
                     timeOut = timeOut - 4000;
                 }
@@ -71,91 +67,111 @@ public class Devices {
         }
     }
 
+
+    /**
+     * Filters the list of connected devices based on the provided filter options and device availability.
+     *
+     * @param filterOptions The filter options specifying the desired device characteristics.
+     * @return A list of devices that match the filter options and are available.
+     */
     public static List<Device> filterActiveDevicesByOption(FilterOptions filterOptions) {
-        // Get list devices
-        List<Device> activeDevices = getConnectedDevices();
-        List<Device> filteredDevices = new ArrayList<>();
-        for (Device device : activeDevices) {
-            if (matchesFilterOptions(device, filterOptions) && isDeviceAvailable(device.udid)) {
-                filteredDevices.add(device);
-            }
-        }
-        //Return list devices match filterOption
-        return filteredDevices;
-
+        return getConnectedDevices().stream()
+                .filter(device -> matchesFilterOptions(device, filterOptions) && isDeviceAvailable(device.getUdid()))
+                .collect(Collectors.toList());
     }
 
+    /**
+     * Retrieves information about existing sessions from the Appium server.
+     *
+     * @return A JSONArray containing information about existing sessions.
+     * @throws RuntimeException If the Appium server is not available.
+     */
     public static synchronized JSONArray getExistingSession() {
-        JSONArray existingSessions = new JSONArray();
-        if (isAppiumAvailable("http://" + remoteWDHubIP + ":4723/wd/hub/sessions")) {
-            JSONObject response = new ApiHelper().sendGetRequestJSON("http://" + remoteWDHubIP + ":4723/wd/hub/sessions");
-            existingSessions = response.getJSONArray("value");
-        } else {
-            figlet("Appium Server is not available");
-            System.exit(0);
+        String sessionsUrl = String.format("http://%s:%s/wd/hub/sessions", remoteWDHubIP, remoteWDHubPort);
+
+        try {
+            if (!isAppiumAvailable(sessionsUrl)) {
+                figlet("Appium Server is not available");
+                throw new RuntimeException("Appium Server is not available");
+            }
+
+            JSONObject response = new ApiHelper().sendGetRequestJSON(sessionsUrl);
+            return response.getJSONArray("value");
+
+        } catch (Exception e) {
+            logger.error("Error while retrieving existing sessions: {}", e.getMessage());
         }
-        return existingSessions;
+        return new JSONArray();
     }
 
+    /**
+     * Gets the number of existing sessions based on the specified platform.
+     *
+     * @param platform The platform name to count existing sessions for.
+     * @return The count of existing sessions with the specified platform.
+     */
     public static synchronized int getExistingSessionByPlatform(String platform) {
-        int existingSessionByPlatform = 0;
         JSONArray existingSessions = getExistingSession();
-        if (existingSessions.length() != 0) {
-            for (int i = 0; i < existingSessions.length(); i++) {
-//                String existingSessionPlatform = existingSessions.getJSONObject(i).getJSONObject("capabilities").getJSONObject("desired").getString("platformName");
-                String existingSessionPlatform = existingSessions.getJSONObject(i).getJSONObject("capabilities").getString("platformName");
-                if (existingSessionPlatform.equalsIgnoreCase(platform)) {
-                    existingSessionByPlatform = existingSessionByPlatform + 1;
-                }
+
+        return (int) IntStream.range(0, existingSessions.length())
+                .mapToObj(existingSessions::getJSONObject)
+                .map(session -> session.getJSONObject("capabilities").getString("platformName"))
+                .filter(existingSessionPlatform -> existingSessionPlatform.equalsIgnoreCase(platform))
+                .count();
+    }
+
+    /**
+     * Checks if a device with the specified UDID is available by comparing with existing sessions.
+     *
+     * @param udid The unique identifier (UDID) of the device.
+     * @return {@code true} if the device is available; {@code false} otherwise.
+     */
+    public static synchronized Boolean isDeviceAvailable(String udid) {
+        JSONArray existingSessions = getExistingSession();
+
+        if (existingSessions.length() == 0) {
+            logger.info("Device {} is available.", udid);
+            return true;
+        }
+
+        for (Object session : existingSessions) {
+            String existingSessionUDID = ((JSONObject) session).getJSONObject("capabilities").getString("udid");
+            if (existingSessionUDID.contains(udid)) {
+                logger.info("Device {} is not available.", udid);
+                return false;
             }
         }
-        return existingSessionByPlatform;
+
+        logger.info("Device {} is available.", udid);
+        return true;
     }
 
-    public static synchronized Boolean isDeviceAvailable(String udid) {
-        boolean isAvailable = false;
-        JSONArray existingSessions = getExistingSession();
-        if (existingSessions.length() != 0) {
-            isAvailable = true;
-            for (int i = 0; i < existingSessions.length(); i++) {
-                String existingSessionUDID = existingSessions.getJSONObject(i).getJSONObject("capabilities").getString("udid");
-//                String existingSessionUDID = existingSessions.getJSONObject(i).getString("id");
-
-                if (existingSessionUDID.contains(udid)) {
-                    isAvailable = false;
-                    break;
-                }
-            }
-        } else
-            isAvailable = true;
-
-        System.out.println("Device " + udid + " availability is " + isAvailable);
-        return isAvailable;
-    }
-
+    /**
+     * Checks if the specified Appium session has ended by querying the Appium server multiple times.
+     *
+     * @param sessionId The unique identifier of the Appium session.
+     * @return {@code true} if the session has ended, {@code false} otherwise.
+     * @throws RuntimeException If an exception occurs during the API call or response parsing.
+     */
     public static Boolean isSessionEnded(String sessionId) {
-        boolean isCompleted = false;
         int maxRetries = 3;
-        int retryCount = 0;
+        String sessionsEndpoint = "/wd/hub/sessions";
 
-        while (retryCount < maxRetries) {
+        for (int retryCount = 0; retryCount < maxRetries; retryCount++) {
             try {
-                String remoteWDHubIP = AppiumManager.getRemoteWDHubIp();
-                String appiumURL = "http://" + remoteWDHubIP + ":4723/dashboard/api/sessions/" + sessionId;
-                Boolean isReady = isAppiumAvailable("http://" + remoteWDHubIP + ":4723/wd/hub/sessions");
-                if (isReady) {
-                    isAppiumAvailable(appiumURL);
+                String appiumURL = String.format("http://%s:%s%s%s", remoteWDHubIP, remoteWDHubPort, sessionsEndpoint, sessionId);
+
+                if (isAppiumAvailable(appiumURL)) {
                     JSONObject response = new ApiHelper().sendGetRequestJSON(appiumURL);
-                    System.out.println("Ending session ......... " + response.toString());
-                    isCompleted = response.getJSONObject("result").getBoolean("is_completed");
-                    break; // Exit the loop if the API call is successful
+                    logger.info("Ending session: {}", response.toString());
+                    return response.getJSONObject("result").getBoolean("is_completed");
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.error("Error while checking session end status: {}", e.getMessage());
             }
         }
 
-        return isCompleted;
+        return false;
     }
 
     private static boolean matchesFilterOptions(Device device, FilterOptions filterOptions) {

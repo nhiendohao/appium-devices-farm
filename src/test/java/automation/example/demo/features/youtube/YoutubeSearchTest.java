@@ -1,21 +1,19 @@
 package automation.example.demo.features.youtube;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Tags;
-import org.junit.jupiter.api.Test;
+import automation.example.demo.drivermanager.appiumdriver.FilterOptions;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 
 import automation.example.demo.basetest.BaseTest;
 import automation.example.demo.drivermanager.DriverManager;
 import automation.example.demo.features.youtube.ui.pages.YoutubeHomePage;
-import helpers.AllureReportHelpers;
 import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
+
+import static automation.example.demo.drivermanager.appiumdriver.AppiumManager.waitForSessionEnded;
 
 @Tags({
         @Tag("Regression"),
@@ -23,36 +21,63 @@ import io.qameta.allure.Story;
 })
 public class YoutubeSearchTest extends BaseTest {
     private WebDriver driver;
+    private AppiumDriver appiumDriver;
+
     YoutubeHomePage youtubeHomePage;
 
     @BeforeEach
     public void beforeTest() {
-        final String deviceUDID = "R5CT20VRX5Y";
-        driver = DriverManager.getMobileDriver(deviceUDID);
-        youtubeHomePage = new YoutubeHomePage(driver);
+        FilterOptions myFilter = new FilterOptions("", "", "ios", "", false, true);
+        appiumDriver = DriverManager.getMobileDriver(myFilter);
+        youtubeHomePage = new YoutubeHomePage(appiumDriver);
+
     }
 
     @AfterEach
     public void afterTest() {
-        AllureReportHelpers.attachScreenshot(driver);
-        DriverManager.quitMobileDriver();
+        String mySessionId = appiumDriver.getSessionId().toString();
+        appiumDriver.quit();
+        waitForSessionEnded(mySessionId, 20000);
     }
 
     @Severity(SeverityLevel.NORMAL)
-    @Description("Verify corresponding result displays when searching for U17")
+    @Description("Verify corresponding result displays when searching for chicken")
     @Story("Youtube")
     @Test
-    public void verifyCorrespondingResultDisplaysWhenSearchingForU17() {
-        youtubeHomePage.searchFor("u17 viet nam");
-        youtubeHomePage.chooseAnItemFromSuggestionList(1);
+    public void verifyCorrespondingResultDisplaysWhenSearchingForChicken1() {
+
+        youtubeHomePage.searchFor("hello");
+        youtubeHomePage.chooseAnItemFromSuggestionList("hello vietnam");
+
     }
 
     @Severity(SeverityLevel.NORMAL)
-    @Description("Verify corresponding result displays when searching for U23")
+    @Description("Verify corresponding result displays when searching for chicken")
     @Story("Youtube")
     @Test
-    public void verifyCorrespondingResultDisplaysWhenSearchingForU23() {
-        youtubeHomePage.searchFor("u23 viet nam");
-        youtubeHomePage.chooseAnItemFromSuggestionList(1);
+    public void verifyCorrespondingResultDisplaysWhenSearchingForChicken2() {
+        youtubeHomePage.searchFor("hello");
+        youtubeHomePage.chooseAnItemFromSuggestionList("hello vietnam");
+
+    }
+
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Verify corresponding result displays when searching for chicken")
+    @Story("Youtube")
+    @Test
+    public void verifyCorrespondingResultDisplaysWhenSearchingForChicken3() {
+        youtubeHomePage.searchFor("hello");
+        youtubeHomePage.chooseAnItemFromSuggestionList("hello vietnam");
+
+    }
+
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Verify corresponding result displays when searching for chicken")
+    @Story("Youtube")
+    @Test
+    public void verifyCorrespondingResultDisplaysWhenSearchingForChicken4() {
+        youtubeHomePage.searchFor("hello");
+        youtubeHomePage.chooseAnItemFromSuggestionList("hello vietnam");
+
     }
 }

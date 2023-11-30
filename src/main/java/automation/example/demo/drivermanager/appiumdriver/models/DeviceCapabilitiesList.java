@@ -18,7 +18,7 @@ public class DeviceCapabilitiesList {
         if (instance == null) {
             synchronized (DeviceCapabilitiesList.class) {
                 instance = DataLoaderHelpers.loadDataFromSource(
-                        Constants.DEVICE_CAPABILITIES_FILE_PATH,
+                        Constants.DEVICE_CAPABILITIES_FILE_PATH_NEW,
                         DeviceCapabilitiesList.class);
             }
         }

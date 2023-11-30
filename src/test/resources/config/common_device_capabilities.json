@@ -1,0 +1,31 @@
+{
+  "deviceCapabilitiesList": {
+    "ios": {
+      "automationName": "XCUITest",
+      "platformName": "iOS",
+      "udid": "TestDevicesUDID",
+      "deviceName": "TestDevicesName",
+      "platformVersion": "TestDevicesOSVersion",
+      "bundleId": "com.google.ios.youtube",
+      "xcodeOrgId": "8HHLMJ9MK2",
+      "xcodeSigningId": "iPhone Developer",
+      "wdaLocalPort": "8100-NoUse",
+      "usePrebuiltWDA": true,
+      "noReset": true
+    },
+    "android": {
+      "automationName": "UiAutomator2",
+      "platformName": "Android",
+      "udid": "TestDevicesUDID",
+      "deviceName": "TestDevicesName",
+      "platformVersion": "TestDevicesOSVersion",
+      "appPackage": "com.google.android.youtube",
+      "appActivity": "com.google.android.apps.youtube.app.watchwhile.WatchWhileActivity",
+      "app": "path/to/your/apk",
+      "noReset": true,
+      "nativeWebScreenshot": true,
+      "systemPort": "8101-NoUse",
+      "fullReset": false
+    }
+  }
+}

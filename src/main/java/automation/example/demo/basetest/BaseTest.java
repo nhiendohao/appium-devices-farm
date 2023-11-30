@@ -15,7 +15,7 @@ public class BaseTest {
 
     @AfterAll
     public static void tearDown() {
-        System.out.println("Running AfterAll  with thread ID " + Thread.currentThread().getId());
-        stopAppiumServer();
+//        System.out.println("Running AfterAll  with thread ID " + Thread.currentThread().getId());
+//        stopAppiumServer();
     }
 }

@@ -17,7 +17,7 @@
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
     <maven-resources-plugin.version>3.3.0</maven-resources-plugin.version>
-    <maven-clean-plugin.version>3.2.0</maven-clean-plugin.version>
+    <maven-clean-plugin.version>3.3.1</maven-clean-plugin.version>
 
     <appium.version>8.5.0</appium.version>
     <selenium.version>4.11.0</selenium.version>
@@ -44,6 +44,7 @@
     <appium.udid>QV780HN49H</appium.udid>
     <webdriver.driver>firefox</webdriver.driver>
     <webdriver.remoteurl>http://localhost:4444/wd/hub</webdriver.remoteurl>
+
   </properties>
 
   <profiles>
@@ -118,7 +119,11 @@
       <artifactId>junit-platform-launcher</artifactId>
       <version>${junit.platform.version}</version>
     </dependency>
-
+    <dependency>
+      <groupId>com.github.lalyos</groupId>
+      <artifactId>jfiglet</artifactId>
+      <version>0.0.8</version>
+    </dependency>
     <dependency>
       <groupId>org.junit.platform</groupId>
       <artifactId>junit-platform-runner</artifactId>
@@ -174,7 +179,21 @@
       <artifactId>slf4j-simple</artifactId>
       <version>${log4j.version}</version>
     </dependency>
-
+      <dependency>
+          <groupId>org.json</groupId>
+          <artifactId>json</artifactId>
+          <version>20220924</version>
+      </dependency>
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-remote-driver</artifactId>
+      <version>4.13.0</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.4.5</version>
+    </dependency>
   </dependencies>
 
   <build>
@@ -205,8 +224,8 @@
 
           <systemPropertyVariables>
             <appium.udid>${appium.udid}</appium.udid>
-            <webdriver.driver>${webdriver.driver}</webdriver.driver>
-            <webdriver.remoteurl>${webdriver.remoteurl}</webdriver.remoteurl>
+<!--            <webdriver.driver>${webdriver.driver}</webdriver.driver>-->
+<!--            <webdriver.remoteurl>${webdriver.remoteurl}</webdriver.remoteurl>-->
             <test.environment>${test.environment}</test.environment>
 
             <baseurl>${baseurl}</baseurl>
@@ -250,7 +269,7 @@
 
       <plugin>
         <artifactId>maven-resources-plugin</artifactId>
-        <version>${maven-resources-plugin.version}</version>
+        <version>${maven-clean-plugin.version}</version>
         <executions>
           <execution>
             <id>copy-allure-files</id>
@@ -277,7 +296,7 @@
 
       <plugin>
         <artifactId>maven-clean-plugin</artifactId>
-        <version>${maven-clean-plugin.version}</version>
+        <version>3.3.1</version>
         <configuration>
           <filesets>
             <fileset>
