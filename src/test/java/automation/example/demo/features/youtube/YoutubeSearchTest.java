@@ -20,14 +20,12 @@ import static automation.example.demo.drivermanager.appiumdriver.AppiumManager.w
         @Tag("YoutubeSearch"),
 })
 public class YoutubeSearchTest extends BaseTest {
-    private WebDriver driver;
     private AppiumDriver appiumDriver;
-
     YoutubeHomePage youtubeHomePage;
 
     @BeforeEach
     public void beforeTest() {
-        FilterOptions myFilter = new FilterOptions("", "", "ios", "", false, true);
+        FilterOptions myFilter = new FilterOptions("", "", "android", "", false, true);
         appiumDriver = DriverManager.getMobileDriver(myFilter);
         youtubeHomePage = new YoutubeHomePage(appiumDriver);
 
@@ -46,7 +44,7 @@ public class YoutubeSearchTest extends BaseTest {
     @Test
     public void verifyCorrespondingResultDisplaysWhenSearchingForChicken1() {
 
-        youtubeHomePage.searchFor("hello");
+        youtubeHomePage.searchFor("hello vietnam");
         youtubeHomePage.chooseAnItemFromSuggestionList("hello vietnam");
 
     }
@@ -56,7 +54,7 @@ public class YoutubeSearchTest extends BaseTest {
     @Story("Youtube")
     @Test
     public void verifyCorrespondingResultDisplaysWhenSearchingForChicken2() {
-        youtubeHomePage.searchFor("hello");
+        youtubeHomePage.searchFor("hello vietnam");
         youtubeHomePage.chooseAnItemFromSuggestionList("hello vietnam");
 
     }
@@ -66,7 +64,7 @@ public class YoutubeSearchTest extends BaseTest {
     @Story("Youtube")
     @Test
     public void verifyCorrespondingResultDisplaysWhenSearchingForChicken3() {
-        youtubeHomePage.searchFor("hello");
+        youtubeHomePage.searchFor("hello vietnam");
         youtubeHomePage.chooseAnItemFromSuggestionList("hello vietnam");
 
     }
@@ -76,7 +74,7 @@ public class YoutubeSearchTest extends BaseTest {
     @Story("Youtube")
     @Test
     public void verifyCorrespondingResultDisplaysWhenSearchingForChicken4() {
-        youtubeHomePage.searchFor("hello");
+        youtubeHomePage.searchFor("hello vietnam");
         youtubeHomePage.chooseAnItemFromSuggestionList("hello vietnam");
 
     }

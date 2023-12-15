@@ -1,10 +1,5 @@
 package automation.example.demo.drivermanager.appiumdriver;
 
-
-import org.apache.http.util.CharArrayBuffer;
-
-import java.util.Collection;
-
 public class FilterOptions {
     private String name;
     private String udid;

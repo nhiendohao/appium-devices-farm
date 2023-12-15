@@ -32,7 +32,7 @@ public class YoutubeHomePage extends MobileObject {
     public By suggestionList(String itemName) {
         Platform platform = DriverManager.getMobilePlatform(driver);
         if (platform.equals(Platform.ANDROID)) {
-            return AppiumBy.xpath(String.format("(//android.widget.TextView)[%s]", itemName));
+            return AppiumBy.xpath(String.format("(//android.widget.TextView)[@text='%s']", itemName));
         } else {
             return AppiumBy.xpath(String.format("//XCUIElementTypeStaticText[@name='%s, Search suggestion']", itemName));
         }
