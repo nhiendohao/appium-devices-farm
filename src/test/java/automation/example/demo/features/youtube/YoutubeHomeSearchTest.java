@@ -48,7 +48,7 @@ public class YoutubeHomeSearchTest extends BaseTest {
     @Story("Youtube")
     @Test
     public void verifyCorrespondingResultDisplaysWhenSearchingForChicken() {
-        FilterOptions myFilter = new FilterOptions("", "", "android", "", true, true);
+        FilterOptions myFilter = new FilterOptions("", "", "ios", "", true, true);
         appiumDriver = DriverManager.getMobileDriver(myFilter);
         youtubeHomePage = new YoutubeHomePage(appiumDriver);
 
@@ -62,7 +62,7 @@ public class YoutubeHomeSearchTest extends BaseTest {
     @Story("Youtube")
     @Test
     public void verifyCorrespondingResultDisplaysWhenSearchingForChicken1() {
-        FilterOptions myFilter = new FilterOptions("", "", "android", "", true, true);
+        FilterOptions myFilter = new FilterOptions("", "", "ios", "", true, true);
         appiumDriver = DriverManager.getMobileDriver(myFilter);
         youtubeHomePage = new YoutubeHomePage(appiumDriver);
         youtubeHomePage.searchFor("hello vietnam");

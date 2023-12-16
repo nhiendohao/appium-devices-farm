@@ -7,17 +7,18 @@
 - Allure Report 2.14.0
 - Allure JUnit4 2.14.0
 
-## Maven command
-**Run all tests**
+## Run Test Command
+**Run with remote Appium**
+- Provide environment variable for **_remote_appium_** and **_remote_appium_port_**
 ```
-    mvn clean test
+    mvn clean test -Dremote_appium=127.0.0.1 -Dremote_appium_port=4723
 ```
 
-**Run test by tags**
+**Filter test by tags**
 - Run tests which tagged with `YoutubeSearch` and exclude tagged with `random tag`
 
 ```
-    mvn clean test -Dgroups="YoutubeSearch" -DexcludedGroups="random tag"
+    mvn clean test -Dgroups="YoutubeSearch" -DexcludedGroups="random tag" 
 ```
 
 - Run tests which tagged with `random tag` or  `YoutubeSearch`
@@ -28,26 +29,6 @@
 - Run tests which tagged both `random tag` and  `YoutubeSearch`
 ```
     mvn test -Dgroups="random tag & YoutubeSearch"
-```
-
-### Allure Report
-- Install Allure Report
-```
-    brew install allure
-```
-
-- Open Allure Report
-```
-allure serve [path/to/allure-results]
-Example:
-    allure serve target/allure-results
-```
-
-- Generate clean report folder
-```
-allure generate [path/to/allure-results] --clean --output [path/to/allure-report]
-Example:
-    allure generate target/allure-results --clean --output allure-report
 ```
 
 ### Appium Device Farm
@@ -88,6 +69,7 @@ public FilterOptions(String name, String udid, String platform, String platformV
     appiumDriver = DriverManager.getMobileDriver(myFilter);
 ```
 - **Test Flow**:
+![](docs/assets/img_1.png)
   * Get FilterOption on Test scripts (Before Each/Within test case)
   * Get Connected Devices on Hub
   * Compare and pick 1st matched of (FilterOption vs Connected Devices)
@@ -100,4 +82,51 @@ public FilterOptions(String name, String udid, String platform, String platformV
   * **Appium hub** : Hub is a server that accepts access requests from the WebDriver client, routing the W3C test commands to the remote drives on nodes. It takes instructions from the client and executes them remotely on the various nodes in parallel
   * **Appium node server**: Node is a remote machine that consists of devices and appium server running with device-farm active. It receives requests from the hub in the form of W3C test commands and executes them using WebDriver
 ![](docs/assets/Hub_setup.png)
-    
+
+### Parallelism on Junit5
+
+- Requirement: Create `junit-platform.properties` file in `src/test/resources`
+- Run test one by one  
+```properties
+junit.jupiter.execution.parallel.mode.default = same_thread
+junit.jupiter.execution.parallel.mode.classes.default = same_thread
+```
+or
+```properties
+junit.jupiter.execution.parallel.enabled = false
+```
+- Run test parallel by Class, test method sequentially _(current implementation does not support this mode for device farm yet)_
+```properties
+junit.jupiter.execution.parallel.enabled = true
+junit.jupiter.execution.parallel.mode.default = same_thread
+junit.jupiter.execution.parallel.mode.classes.default = concurrent
+```
+- Run parallel test method within test class, but each class run separately
+```properties
+junit.jupiter.execution.parallel.enabled = true
+junit.jupiter.execution.parallel.mode.default = concurrent
+junit.jupiter.execution.parallel.mode.classes.default = same_thread
+```
+- Run every test parallel _(current implementation does not support this mode for device farm yet)_
+```properties
+junit.jupiter.execution.parallel.enabled = true
+junit.jupiter.execution.parallel.mode.default = concurrent
+junit.jupiter.execution.parallel.mode.classes.default = concurrent
+```
+- Custom Parallel Strategy:
+ Update _`src/test/java/automation/example/demo/features/CustomStrategy.java`_ to fix number of test thread
+### Allure Report
+- Install Allure Report
+```shell
+  brew install allure
+```
+
+- Open Allure Report: _allure serve [path/to/allure-results]_
+```shell
+  allure serve target/allure-results
+```
+
+- Generate clean report folder: _allure generate [path/to/allure-results] --clean --output [path/to/allure-report]_
+```shell
+  allure generate target/allure-results --clean --output allure-report
+```

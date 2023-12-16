@@ -9,7 +9,7 @@ public class Constants {
 
     public static final String CHANNEL_LIST_FILE_PATH = "./testdata/json/channel_list.json";
 
-    public static final int DEVICE_WAIT_TINE = 180;
+    public static final int DEVICE_WAIT_TINEOUT = 180000;
     public static final int APPIUM_SERVER_STARTUP_TIME = 30000;
     public static final String NEW_COMMAND_TIMEOUT = "30000";
 

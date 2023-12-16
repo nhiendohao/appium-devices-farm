@@ -37,42 +37,10 @@
 
     <testrail.projectId>319</testrail.projectId>
     <testrail.runId></testrail.runId>
-    <testrail.suiteId>34015</testrail.suiteId>
+    <testrail.suiteId></testrail.suiteId>
     <testrail.run>false</testrail.run>
 
-    <test.environment>beta</test.environment>
-    <appium.udid>QV780HN49H</appium.udid>
-    <webdriver.driver>firefox</webdriver.driver>
-    <webdriver.remoteurl>http://localhost:4444/wd/hub</webdriver.remoteurl>
-
   </properties>
-
-  <profiles>
-    <profile>
-      <id>beta</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
-      <properties>
-        <baseurl>https://google.com.vn</baseurl>
-        <api.baseurl>https://gorest.co.in</api.baseurl>
-        <api.token>2489b406fd8e5e801905326ec778dc2f49304d000a447049e1e67d135af8df04</api.token>
-      </properties>
-    </profile>
-
-    <profile>
-      <id>rc</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-      </activation>
-      <properties>
-        <baseurl>https://google.com.vn</baseurl>
-        <api.baseurl>https://gorest.co.in</api.baseurl>
-        <api.token>2489b406fd8e5e801905326ec778dc2f49304d000a447049e1e67d135af8df04</api.token>
-      </properties>
-    </profile>
-  </profiles>
-
   <dependencies>
 
     <dependency>
@@ -223,15 +191,6 @@
           </systemProperties>
 
           <systemPropertyVariables>
-            <appium.udid>${appium.udid}</appium.udid>
-<!--            <webdriver.driver>${webdriver.driver}</webdriver.driver>-->
-<!--            <webdriver.remoteurl>${webdriver.remoteurl}</webdriver.remoteurl>-->
-            <test.environment>${test.environment}</test.environment>
-
-            <baseurl>${baseurl}</baseurl>
-            <api.baseurl>${api.baseurl}</api.baseurl>
-            <api.token>${api.token}</api.token>
-
             <testrail.projectId>${testrail.projectId}</testrail.projectId>
             <testrail.runId>${testrail.runId}</testrail.runId>
             <testrail.suiteId>${testrail.suiteId}</testrail.suiteId>
@@ -268,6 +227,7 @@
       </plugin>
 
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>
         <version>${maven-clean-plugin.version}</version>
         <executions>
@@ -293,8 +253,8 @@
           </execution>
         </executions>
       </plugin>
-
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-clean-plugin</artifactId>
         <version>3.3.1</version>
         <configuration>
@@ -305,8 +265,6 @@
           </filesets>
         </configuration>
       </plugin>
-
     </plugins>
   </build>
-
 </project>

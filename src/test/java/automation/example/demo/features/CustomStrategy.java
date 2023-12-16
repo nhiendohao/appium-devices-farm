@@ -8,22 +8,22 @@ public class CustomStrategy implements ParallelExecutionConfiguration, ParallelE
 
     @Override
     public int getParallelism() {
-        return 3;
+        return 2;
     }
 
     @Override
     public int getMinimumRunnable() {
-        return 3;
+        return 2;
     }
 
     @Override
     public int getMaxPoolSize() {
-        return 3;
+        return 2;
     }
 
     @Override
     public int getCorePoolSize() {
-        return 3;
+        return 2;
     }
 
     @Override

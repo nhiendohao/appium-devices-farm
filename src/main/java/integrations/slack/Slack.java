@@ -26,7 +26,7 @@ public class Slack {
 
     private static void sendMessage(String message) {
         Map<String, String> data = new HashMap<>();
-        data.put("channel", "C04DZE14GCR");
+        data.put("channel", "");
         data.put("text", message);
         data.put("icon_emoji", ":twice:");
 
@@ -35,7 +35,7 @@ public class Slack {
                 .baseUri("https://slack.com")
                 .contentType("application/json")
                 .header("Authorization",
-                        "Bearer xoxb-4462733300003-4486547363136-bNgSUcktbJPyoOSSnpmPh6kU")
+                        "Bearer sampleBearer")
                 .body(data)
                 .log().all()
                 .post("/api/chat.postMessage");

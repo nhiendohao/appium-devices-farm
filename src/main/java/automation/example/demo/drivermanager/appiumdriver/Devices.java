@@ -49,23 +49,43 @@ public class Devices {
                 .count();
     }
 
+    /**
+     * Waits for an available device on the specified platform for a given timeout period.
+     *
+     * This method checks the availability of a device on the specified platform by comparing the existing
+     * session count with the total connected devices count. If the device is available, it logs a message
+     * indicating availability. If not, it enters a loop, periodically checking for availability until either
+     * a device becomes available or the specified timeout is reached.
+     *
+     * @param platform The platform for which device availability is being checked.
+     * @param timeOut  The maximum time (in milliseconds) to wait for a device to become available.
+     * @throws InterruptedException If the thread is interrupted while waiting.
+     */
     public static void waitForAvailableDevice(String platform, int timeOut) {
-        int currentSession = getExistingSessionByPlatform(platform);
         int totalConnectedDevices = countConnectedDevicesByPlatform(platform);
+        int timeElapsed = 0;
 
         try {
-            if (currentSession < totalConnectedDevices) {
-                logger.info("Your device is available");
-            } else {
-                while (currentSession == totalConnectedDevices && timeOut > 0) {
-                    Thread.sleep(4000);
-                    timeOut = timeOut - 4000;
+            while (timeElapsed < timeOut) {
+                int currentSession = getExistingSessionByPlatform(platform);
+
+                if (currentSession < totalConnectedDevices) {
+                    logger.info("Your device is available");
+                    return; // Exit the method if the device is available
                 }
+
+                logger.info("-------------Current Device is busy.Waiting for available devices -------------");
+                Thread.sleep(4000);
+                timeElapsed += 4000;
             }
         } catch (InterruptedException e) {
+            Thread.currentThread().interrupt(); // Preserve the interrupted status
             e.printStackTrace();
         }
+
+        logger.info("Timeout reached. No available device found.");
     }
+
 
 
     /**

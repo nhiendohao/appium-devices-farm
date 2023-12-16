@@ -25,7 +25,7 @@ public class YoutubeSearchTest extends BaseTest {
 
     @BeforeEach
     public void beforeTest() {
-        FilterOptions myFilter = new FilterOptions("", "", "android", "", false, true);
+        FilterOptions myFilter = new FilterOptions("", "", "ios", "", false, true);
         appiumDriver = DriverManager.getMobileDriver(myFilter);
         youtubeHomePage = new YoutubeHomePage(appiumDriver);
 

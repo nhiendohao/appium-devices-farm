@@ -1,6 +1,6 @@
 package automation.example.demo.drivermanager;
 
-import static automation.example.demo.constants.Constants.DEVICE_WAIT_TINE;
+import static automation.example.demo.constants.Constants.DEVICE_WAIT_TINEOUT;
 import static automation.example.demo.drivermanager.appiumdriver.Devices.*;
 import static automation.example.demo.pageobject.PageObject.waitForABit;
 
@@ -78,7 +78,7 @@ public class DriverManager {
      */
     public static synchronized AppiumDriver getMobileDriver(FilterOptions myFilter) {
         final DesiredCapabilityBuilder builder = new DesiredCapabilityBuilder();
-        waitForAvailableDevice(myFilter.getPlatform(), DEVICE_WAIT_TINE);
+        waitForAvailableDevice(myFilter.getPlatform(), DEVICE_WAIT_TINEOUT);
 
         List<Device> filteredDevices = filterActiveDevicesByOption(myFilter);
         String deviceUdid = "N/A";
