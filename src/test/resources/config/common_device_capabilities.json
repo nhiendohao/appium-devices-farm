@@ -7,7 +7,7 @@
       "deviceName": "TestDevicesName",
       "platformVersion": "TestDevicesOSVersion",
       "bundleId": "com.google.ios.youtube",
-      "xcodeOrgId": "8HHLMJ9MK2",
+      "xcodeOrgId": "yourOrgId",
       "xcodeSigningId": "iPhone Developer",
       "wdaLocalPort": "8100-NoUse",
       "usePrebuiltWDA": true,
