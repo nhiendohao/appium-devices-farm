@@ -9,11 +9,11 @@
 
 # Table of Contents
 1. [Test command](#command)
-2. [Appium Devices Farm](#Device_Farm)
+2. [Appium Devices Farm](#devices_farm)
 3. [Test Flow](#Test_Flow)
 4. [Parallelism](#Parallelism)
-5. [Allure Report](#Allure_Report)
-6. [Known Issue](#Known_Issues)
+5. [Allure Report](#allure)
+6. [Known Issue](#issues)
 
 ## Run Test Command <a name="command"></a>
 **Run with remote Appium**
@@ -39,7 +39,7 @@
     mvn test -Dgroups="random tag & YoutubeSearch"
 ```
 
-### Appium Device Farm <a name="Device_Farm"></a>
+### Appium Device Farm <a name="devices_farm"></a>
 - **Prerequisite**: Appium version 2.0.X
 
 - **Install plugins:**
@@ -124,7 +124,7 @@ junit.jupiter.execution.parallel.mode.classes.default = concurrent
 ```
 - Custom Parallel Strategy:
  Update _`src/test/java/automation/example/demo/features/CustomStrategy.java`_ to fix number of test thread
-### Allure Report <a name="Allure_Report"></a>
+### Allure Report <a name="allure"></a>
 - Install Allure Report
 ```shell
   brew install allure
@@ -140,7 +140,7 @@ junit.jupiter.execution.parallel.mode.classes.default = concurrent
   allure generate target/allure-results --clean --output allure-report
 ```
 
-### Known Issues <a name="Known_Issues"></a>
+### Known Issues <a name="issues"></a>
 1. **IOS Tracking**:
 We have two options to install go-ios module to manage iOS devices
    - Option1 --> If you want device-farm to help you download go-ios module. Run command `appium plugin run device-farm install-go-ios`
