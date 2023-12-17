@@ -7,7 +7,15 @@
 - Allure Report 2.14.0
 - Allure JUnit4 2.14.0
 
-## Run Test Command
+# Table of Contents
+1. [Test command](#command)
+2. [Appium Devices Farm](#Device_Farm)
+3. [Test Flow](#Test_Flow)
+4. [Parallelism](#Parallelism)
+5. [Allure Report](#Allure_Report)
+6. [Known Issue](#Known_Issues)
+
+## Run Test Command <a name="command"></a>
 **Run with remote Appium**
 - Provide environment variable for **_remote_appium_** and **_remote_appium_port_**
 ```
@@ -31,7 +39,7 @@
     mvn test -Dgroups="random tag & YoutubeSearch"
 ```
 
-### Appium Device Farm
+### Appium Device Farm <a name="Device_Farm"></a>
 - **Prerequisite**: Appium version 2.0.X
 
 - **Install plugins:**
@@ -68,7 +76,8 @@ public FilterOptions(String name, String udid, String platform, String platformV
     FilterOptions myFilter = new FilterOptions("", "", "ios", "", true, true);
     appiumDriver = DriverManager.getMobileDriver(myFilter);
 ```
-- **Test Flow**:
+- **Test Flow**:<a name="Test_Flow"></a>
+
 ![](docs/assets/img_1.png)
   * Get FilterOption on Test scripts (Before Each/Within test case)
   * Get Connected Devices on Hub
@@ -78,12 +87,12 @@ public FilterOptions(String name, String udid, String platform, String platformV
       * If that device is busy -> Change to next matched devices and repeat loop
   * Once test run complete -> Driver.quit -> Wait for Appium server available with post steps clean up
   * Screenshots and recorded video is stored at http://127.0.0.1:4723/dashboard/ by session iD
-* **Advance setup**:
-  * **Appium hub** : Hub is a server that accepts access requests from the WebDriver client, routing the W3C test commands to the remote drives on nodes. It takes instructions from the client and executes them remotely on the various nodes in parallel
-  * **Appium node server**: Node is a remote machine that consists of devices and appium server running with device-farm active. It receives requests from the hub in the form of W3C test commands and executes them using WebDriver
+  * **Advance setup**:
+    * **Appium hub** : Hub is a server that accepts access requests from the WebDriver client, routing the W3C test commands to the remote drives on nodes. It takes instructions from the client and executes them remotely on the various nodes in parallel
+    * **Appium node server**: Node is a remote machine that consists of devices and appium server running with device-farm active. It receives requests from the hub in the form of W3C test commands and executes them using WebDriver
 ![](docs/assets/Hub_setup.png)
 
-### Parallelism on Junit5
+### Parallelism on Junit5 <a name="Parallelism"></a>
 
 - Requirement: Create `junit-platform.properties` file in `src/test/resources`
 - Run test one by one  
@@ -115,7 +124,7 @@ junit.jupiter.execution.parallel.mode.classes.default = concurrent
 ```
 - Custom Parallel Strategy:
  Update _`src/test/java/automation/example/demo/features/CustomStrategy.java`_ to fix number of test thread
-### Allure Report
+### Allure Report <a name="Allure_Report"></a>
 - Install Allure Report
 ```shell
   brew install allure
@@ -130,3 +139,16 @@ junit.jupiter.execution.parallel.mode.classes.default = concurrent
 ```shell
   allure generate target/allure-results --clean --output allure-report
 ```
+
+### Known Issues <a name="Known_Issues"></a>
+1. **IOS Tracking**:
+We have two options to install go-ios module to manage iOS devices
+   - Option1 --> If you want device-farm to help you download go-ios module. Run command `appium plugin run device-farm install-go-ios`
+   - Option2 --> You can install the go-ios module with `npm install -g go-ios`
+     - We need to set the environment variable.
+           After installing with Option2 --> `GO_IOS="/usr/local/lib/node_modules/go-ios/dist/{ SELECT YOUR OS }/ios"`
+2. Currently, Parallelism only support:
+   - Run parallel test method within test class, but each class run separately
+3. Current implementation is not optimized for `waitForAvailableDevice()`. 
+   - If your server include both Android & iOS device, you have to control number of requested devices <= connected devices.
+   - If you separate Server for Android and iOS, there is no issue with the waitForDevice logics
